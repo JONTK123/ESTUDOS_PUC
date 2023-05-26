@@ -7,7 +7,7 @@ def criarLista():
         lista.append(int(i)) # Coloco cada item percorrido em formato de inteiro novamente para poder realizar a soma
     print(lista)
 
-    return lista
+    return lista # retornar listas pois esse valor ( valor da funcao criarLista ) sera usado dps
 
 
 def somaDigitos(lista):
@@ -29,6 +29,7 @@ def maiorDigito(lista):
 
     return maior
 
+# METODO SEM CRIAR UMA FUNCAO PARA CRIAR LISTA
 
 '''x = int(input('Digite um valor para x: ')) # Leio um numero inteiro
 x_str = str(x) # transformo em str para percorrer CADA elemento digitado
@@ -37,6 +38,7 @@ for i in  (x_str): # percorro cada elemento digitado
     lista.append(int(i)) # Coloco cada item percorrido em formato de inteiro novamente para poder realizar a soma
 print(lista)'''
 
+# METODO CRIANDO UMA FUNCAO PARA CRIAR LISTA
 
 lista = criarLista()
 calcularSoma = somaDigitos(lista)

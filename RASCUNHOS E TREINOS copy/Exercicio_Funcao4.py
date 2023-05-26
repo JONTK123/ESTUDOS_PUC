@@ -1,5 +1,6 @@
 
 def calculo_fatorial(x):
+    
     fatorial = 1
     for i in range(1, x+1):
         fatorial*= i

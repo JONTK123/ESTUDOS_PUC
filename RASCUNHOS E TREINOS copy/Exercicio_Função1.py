@@ -14,7 +14,8 @@ def suce_ante(n):
 
 n = int(input('Digite um n: '))
 
-suce_ante(n)
+suce_ante(n) # BURRO NAO CHAMOU
+
 
 
 
