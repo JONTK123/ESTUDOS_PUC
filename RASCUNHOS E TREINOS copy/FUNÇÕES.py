@@ -43,7 +43,7 @@ variavel2 = input('digite o valor da variavel 2: ')
 resultado = soma(variavel1,variavel2)
 
 print(soma)
-11
 
 
+sexo
 
