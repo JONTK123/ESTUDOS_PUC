@@ -3,14 +3,14 @@
 
 
 def contagem_de_ocorrencia(frase_lista):
-
     ocorrencias = {}
     for i in frase_lista:
-        if i in frase_lista:
+        if i in ocorrencias:
             ocorrencias[i] += 1
+        else:
+            ocorrencias[i] = 1
         
-        
-        return
+    return ocorrencias
 
 
 
@@ -19,8 +19,10 @@ frase = 'Enzo não é sozinho, Enzo é safado'
 
 frase_lista = []
 for i in frase:
-    frase_lista.append(i)
+    if i != ' ':
+        frase_lista.append(i)
 print(frase_lista)
+
 
 resultado = contagem_de_ocorrencia(frase_lista)
 print(resultado)
