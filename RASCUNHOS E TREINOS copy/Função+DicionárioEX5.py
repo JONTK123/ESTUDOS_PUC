@@ -29,4 +29,4 @@ dicionario[a] = [6,5,3,5,66,33,2,231,23,1,1,2,3,3,3]
 print(dicionario)
 
 resultado = media_dict(dicionario)
-print(f'resultado:.2f')
+print(resultado)

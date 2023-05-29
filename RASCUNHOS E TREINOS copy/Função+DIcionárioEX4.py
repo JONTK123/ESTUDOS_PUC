@@ -12,9 +12,6 @@ def contagem_de_ocorrencia(frase_lista):
         
     return ocorrencias
 
-
-
-
 frase = 'Enzo não é sozinho, Enzo é safado'
 
 frase_lista = []
