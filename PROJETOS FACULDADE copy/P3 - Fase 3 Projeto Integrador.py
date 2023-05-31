@@ -66,7 +66,7 @@ while True:
 
             for linhas in linhasBD:
                 id_bd, pi_bd, pif_bd, oz_bd, co_bd, nit_bd, enx_bd = linhas 
-                print('{:>10} {:>10} {:>10} {:>10} {:>10} {:>10} {:>10}'.format(id_bd, pi_bd, pif_bd, oz_bd, co_bd, nit_bd, enx_bd))  
+                print('{:>10} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f}'.format(id_bd, pi_bd, pif_bd, oz_bd, co_bd, nit_bd, enx_bd))  
             
             print('-'*84)
             print()
@@ -96,7 +96,7 @@ while True:
             print('-'*84)
             print()
             print('{:>10} {:>10} {:>10} {:>10} {:>10} {:>10} {:>10}'.format('ID', 'MP10', 'MP25', 'O3', 'CO', 'N2', 'SO2'))
-            print('{:>10} {:>10} {:>10} {:>10} {:>10} {:>10} {:>10}'.format(id_bda, pi_bda, pif_bda, oz_bda, co_bda, nit_bda, enx_bda)) 
+            print('{:>10} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f}'.format(id_bda, pi_bda, pif_bda, oz_bda, co_bda, nit_bda, enx_bda)) 
             print('-'*84)
 
             Resp == 0
@@ -117,7 +117,7 @@ while True:
 
             for linhas in linhasBDx:
                 id_bdx, pi_bdx, pif_bdx, oz_bdx, co_bdx, nit_bdx, enx_bdx = linhas 
-                print('{:>10} {:>10} {:>10} {:>10} {:>10} {:>10} {:>10}'.format(id_bdx, pi_bdx, pif_bdx, oz_bdx, co_bdx, nit_bdx, enx_bdx))  
+                print('{:>10} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f}'.format(id_bdx, pi_bdx, pif_bdx, oz_bdx, co_bdx, nit_bdx, enx_bdx))  
             
             print('-'*84)
 
@@ -132,7 +132,7 @@ while True:
             cursor.execute(f'SELECT * FROM gases WHERE id_gases = {id}')
             linhaExcluir = cursor.fetchone()
             id_bdax, pi_bdax, pif_bdax, oz_bdax, co_bdax, nit_bdax, enx_bdax = linhaExcluir
-            print('{:>10} {:>10} {:>10} {:>10} {:>10} {:>10} {:>10}'.format(id_bdax, pi_bdax, pif_bdax, oz_bdax, co_bdax, nit_bdax, enx_bdax))  
+            print('{:>10} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f}'.format(id_bdax, pi_bdax, pif_bdax, oz_bdax, co_bdax, nit_bdax, enx_bdax))  
 
             RespX = input('Deseja realmente excluir(S/N)? ').upper()
 
@@ -157,7 +157,7 @@ while True:
             connection.commit()
             linhaAlterada2 = cursor.fetchone()
             pi_bdaxa, pif_bdaxa, oz_bdaxa, co_bdaxa, nit_bdaxa, enx_bdaxa = linhaAlterada2
-            print('{:>10} {:>10} {:>10} {:>10} {:>10} {:>10}'.format(pi_bdaxa, pif_bdaxa, oz_bdaxa, co_bdaxa, nit_bdaxa, enx_bdaxa)) 
+            print('{:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f} {:>10.2f}'.format(pi_bdaxa, pif_bdaxa, oz_bdaxa, co_bdaxa, nit_bdaxa, enx_bdaxa)) 
             print('-'*71)
 
             print('\033[m\n\033[32mN1 - Boa\033[m\n\033[33mN2 - Moderada\033[m\n\033[34mN3 - Ruim\033[m\n\033[31mN4 - Muito ruim\033[m\n\033[35mN5 - Péssima\033[m\n')
