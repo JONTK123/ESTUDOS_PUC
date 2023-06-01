@@ -1,4 +1,4 @@
-'''Thiago Luiz Fossa e Gustavo Bicaletto'''
+'''Thiago Luiz Fossa, Gustavo Bicaletto, '''
 
 while True:
     try: 
@@ -107,16 +107,16 @@ while True:
     except ValueError:
         print('Tem que digitar A CIDADE...')
 
-menorNescalas = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 # valor de referencia para determinar quem eh o menor apenas
+menorNescalas = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
 
 for keys, values in Voos.items():
-    if Perg4 == values[0] and Perg5 == values[1]: # Entre as duas cidades
+    if Perg4 == values[0] and Perg5 == values[1]: 
         if values[2] < menorNescalas: 
             menorNescalas = values[2]
-            voomenorescala = keys,values # joga os valores do dicionario para a nova variavel voomenorescala
+            voomenorescala = keys,values
         else: 
-            print("Não há voos entre essas cidades") # NAO TA FUNCIONANDO ISSO...
+            print("Não há voos entre essas cidades") 
 
-print(voomenorescala) # print fora do for se nao ele.
+print(voomenorescala) 
 
 
