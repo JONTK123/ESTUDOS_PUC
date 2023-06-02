@@ -22,6 +22,3 @@ print('A soma dos numeros é: ', sum(Lista10n))
 print('A multiplicação dos numeros é:', produto)
 print('A lista de 10 numeros digitados é:', Lista10n[1:])
 
-
-    
-
