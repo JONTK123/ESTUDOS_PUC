@@ -17,12 +17,6 @@ def media_dict(dicionario):
     media = somatoria / j 
     return media
 
-
-   # return media
-
-
-
-
 dicionario = {}
 a = 'a'
 dicionario[a] = [6,5,3,5,66,33,2,231,23,1,1,2,3,3,3]
