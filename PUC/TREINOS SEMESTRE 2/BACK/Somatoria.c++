@@ -87,5 +87,4 @@ int main(){
     
    cout<<"\n SOMATORIA: "<<S;
    return 0;
-
 }
