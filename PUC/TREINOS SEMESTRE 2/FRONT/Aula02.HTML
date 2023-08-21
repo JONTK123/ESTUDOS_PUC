@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Aprendendo HTML de Verdade</title>
+    </head>
+    <body>
+        <h1>Elementos HTML5</h1>
+        <h2>Table - Tabelas</h2>
+        <p>Tabelas apenas usamos para mostras Dados tabulados. Não usamos mais para organizar layouts</p>
+        <p>Tabela antigona desde HTML1:</p>
+        <table>
+            <tr> <!-- TABLE ROW -->
+                <td>RA</td> <!-- TABLE COLUMN -->
+                <td>Nome</td> 
+            </tr>
+            <tr>
+                <td>4567</td>
+                <td>Raquel Oliveira</td>
+            </tr>
+        </table>
+        <!-- ------------------------------------------ -->
+        <p>Tabela Moderna:</p> <!-- Thead e Tbody -->
+        <table border = "10" cellpadding ="10" cellspacing="10"> <!-- PADDING - ESPAÇAMENTO INTERNO DA CELULA, CELL - ELEMENTO DA TABELA, CELLSPACING - ESPAÇO DAS CELULAS -->
+            <thead>
+                <tr>
+                    <th>RA</th>
+                    <th>Nome</th> <!-- Th APENAS PARA HEADER, não usar no body -->
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>23010116</td> 
+                    <td>Thiago Fossa</td>
+                </tr>
+                <tr>
+                    <td>0909090990</td>
+                    <td>Thi Thi 20000</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>As divisões espacias, renomada e famosa... DIVS</p>
+        <p>As divisões espaciais servem para muita coisa, principalmente organizar conteúdos em espaços físicos da página</p>
+
+        <div>
+            <p>Esta é a div 1 EXEMPLO 1</p>
+            <div>
+                <p>Esta é a div 2 que está dentro da div 1</p>
+            </div>
+
+        <p>Observando a delimitação espacial usando estilização CSS ( IN LINE ) evitar usar CSS INLINE ( vamos aprender dps )</p>
+
+        
+        <div style="border:5px solid black;"> <!-- PX = PIXELS, SOLID E COR -->
+            <p>Esta é a div 1</p>
+            <div style="border:5px dotted orange;">
+                <p>Esta é a div 2 que está dentro da div 1</p>
+            </div>
+
+        </div>
+        
+        <p>Entendendo tamanhos relativos e físicos</p>
+        <div style = "border: 5px solid navy; width: 50%;">
+            <p>Está DIV ocupa 50% da largura disponível</p>
+            <div style="border:2px solid black; width: 50%;"
+            <p>Esta ocupa 50% da outra</p>
+            </div>
+        </div>
+
+        <div>
+            <h2>Consulta de faltas</h2>
+            <p>Informe seu RA:</p>
+            <form>
+                <input type="number"/ maxlength="8"> <!-- ESSE CMAPO SO PODE ACEITAR NUMERO RA, 8 CARACTERES E NEM PONTO-->
+                <input type="Submit"/ value = "consultar"> 
+            </form>
+        </div>
+            
+
+
+    </body>
+</html>     
