@@ -1,0 +1,57 @@
+body {
+    background-color:black;
+    font-family:Arial, Helvetica, sans-serif;
+    margin:0;/* SEMPRE ZERO */
+    padding:0; /* SEMPRE ZERO */
+}
+
+
+#main  {
+    background-color: #0c0c0c;
+    padding:50px;
+    width:70%;
+    /* estudar o que o magin 0 auto faz... */
+    margin: 0 auto;
+    border-left:5px solid #282828;
+    border-right:5px solid #282828;
+    height: 900px;
+    /* estudar resoluções CSS */
+}
+
+#header {
+    height: 400px;
+    color: white;
+}
+
+#cover {
+    border: 5px solid fuchsia;
+    width: 40%;
+    float:left;
+}
+
+#cover img { /* TODA IMAGEM QUE ESTA DENTRO DA DIV COVER */
+    height: 200px;
+    width: 200px;
+}
+
+#albumTitle {
+    width: 50%;
+    border: 5px solid yellow;
+    float:right;
+}
+
+#albumTitle h1 {
+    font-size: 5em;
+    font-weight: bold;
+    color: white;
+}
+
+#content {
+    height: 600px;
+    border: 1px solid yellow;
+}
+
+#footer {
+    height: 100px;
+    border: 1px solid blue;
+}
