@@ -1,39 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>NCS</title>
-        <link href="css/album.css"
-        rel="stylesheet">
-    </head>
-    <body>
-        <div id = "main">
-
-            <div id= "header">
-                <div id= "cover">
-                    <img src="assets/IMAGES/COVER.jpg">
-                </div>
-                <div id="albumTitle">
-                    <h1>Views</h1>
-                    <h2>Drake</h2>
-                </div>
+<head>
+    <title>NCS</title>
+    <link href="css/album.css" rel="stylesheet"> <!-- Link para o arquivo CSS -->
+</head>
+<body>
+    <div id="main"> <!-- Seção principal da página -->
+        <div id="header" class="header"> <!-- Cabeçalho da página -->
+            <div id="cover" class="cover"> <!-- Capa do álbum -->
+                <img src="assets/IMAGES/COVER.jpg" alt="Album Cover"> <!-- Imagem da capa do álbum -->
             </div>
-            
-            <div id= "content">
-                <p>Aqui vai a lista de musicas com o botao play</p>
-            </div>
-            <div id= "footer">
-                <p>Informações da empresa</p>
+            <div id="albumInfo" class="album-info"> <!-- Informações do álbum -->
+                <h1 style="color: white;">Views</h1> <!-- Título do álbum -->
+                <h2 style="color: white;">Drake</h2> <!-- Artista do álbum -->
             </div>
         </div>
 
-    </body>
+        <!-- FAIXAS E PLAYER -->
+        
+        <div id="content" class="content"> <!-- Conteúdo da página -->
+            <p style="color: white;">Aqui vai a lista de músicas com o botão de reprodução</p> <!-- Parágrafo de introdução -->
+            <table id="musicslist" cellspacing="5" class="music-list"> <!-- Tabela de músicas -->
+                <thead>
+                    <tr>
+                        <th class="centerTitle">Title</th> <!-- Título da coluna -->
+                        <th>Plays</th> <!-- Título da coluna -->
+                        <th>Durations</th> <!-- Título da coluna -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="centerContent">1</td> <!-- Número da faixa -->
+                        <td>One Dance</td> <!-- Nome da música -->
+                        <td class="centerContent">1.800.000</td> <!-- Número de reproduções -->
+                        <td class="centerContent">6:23</td> <!-- Duração da música -->
+                    </tr>
+                    <tr>
+                        <td class="centerContent">2</td> <!-- Número da faixa -->
+                        <td>Hotline Bling</td> <!-- Nome da música -->
+                        <td class="centerContent">1.000.000</td> <!-- Número de reproduções -->
+                        <td class="centerContent">9:22</td> <!-- Duração da música -->
+                    </tr>
+                    <!-- Mais linhas da tabela de músicas serão adicionadas aqui -->
+                </tbody>
+            </table>
+        </div>
 
-
-
-
-
-
-
-
-
+        <!-- DETALHES E CURIOSIDADES DO ÁLBUM -->
+        
+        <div id="footer" class="footer"> <!-- Rodapé da página -->
+            <p style="color: white;">Informações da empresa</p> <!-- Texto de informações -->
+        </div>
+    </div>
+</body>
 </html>
