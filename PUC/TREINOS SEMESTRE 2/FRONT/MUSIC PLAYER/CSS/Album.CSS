@@ -3,8 +3,7 @@ body { /* Afeta todo o conteudo geral do body no HTML SAO COISAS GERAIS */
     background-color: black;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: auto; 
-    color: white; /* Transforma o texto em branco */
+    padding: 0; 
 }
 
 /* Estilo da seção principal */
@@ -21,47 +20,58 @@ body { /* Afeta todo o conteudo geral do body no HTML SAO COISAS GERAIS */
     height: auto;
     display: flex; /* Como o elemento sera mostrado visualmente, flex te da maior liberdade*/
     align-items: center; 
+    border: 5px solid pink;
 }
 
 /* Estilo da capa do álbum */
 #cover { /* A DIV COVER ESTA DENTRO DA DIV HEADER, HIERARQUIA ENTAO */
-    width: 50%;
+    width: 50%; /* ESTA MUDA A LARGURA PARA A DIV DENTRO DA OUTRA DIV, CONSEQUENTEMENTE A IMAGEM */
+    border: 5px solid blue; 
 } 
 
 #cover img {
-    width: 100%;
+    width: 100%; /* JA ESTA MUDA A IMAGEM DIRETAMENTE */
+    border: 5px solid white;
 }
 
 /* Estilo das informações do álbum */
 #albumInfo {
-    width: 60%;
-    padding-left: 20px;
+    border: 5px solid white;
+    display: flex;
+    margin: auto; /* Adiciona margens automáticas para centralizar na horizontal */
 }
 
 #albumInfo h1 {
     margin: 0;
     font-size: 2.5em;
+    border: 5px solid orange;
+}
+
+#albumInfo h2 {
+    margin: 0;
+    font-size: 2.5em;
+    border: 5px solid rgb(255, 0, 0);
 }
 
 /* Estilo do conteúdo (lista de músicas) */
 #content {
     height: 500px;
     border: 5px solid yellowgreen;
-    padding: 20px 0;
+    padding: 5px
 }
 
 /* Estilo da tabela de músicas */
 #musicslist {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+    border-collapse: collapse; /* ONDE LIGA AS BORDAS DAS TABELAS */
+    margin: auto;
+    border: 5px solid rgb(0, 255, 247);
 }
 
-#musicslist th,
-#musicslist td {
+#musicslist th, #musicslist td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #ccc;
+    border: 4px solid salmon;
 }
 
 /* Estilo do rodapé */
@@ -71,18 +81,7 @@ body { /* Afeta todo o conteudo geral do body no HTML SAO COISAS GERAIS */
     padding: 20px 0;
 }
 
-#musicList {
-    width: 100%;
-    font-size: 1em; /* Corrige a propriedade 'font-size' */
-}
-
-/* Estilos para centralizar o conteúdo da tabela */
+/* Estilos para centralizar o conteúdo da tabela, PELO Q ENTENDI EH PARA FAZER ISSOD DE UMA VEZ NO PROGRSAMA TDODO SEM PRECISAR FAZER INDIVIDUALMENTE EM CADA # DO CSS. */
 .centerTitle, .centerContent {
     text-align: center; /* Centraliza o texto */
 }
-
-/*
-    Prioridades css:
-    syle
-    class
-    seletores # ( identificadores ID )
