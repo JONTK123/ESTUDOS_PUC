@@ -93,27 +93,25 @@ body { /* Afeta todo o conteudo geral do body no HTML SAO COISAS GERAIS */
     text-decoration: none; 
 }
 
-.songMembers a:hover{  /*'HOVER' --> mexe na cor do link quando passa o mouse em cima.*/
-    color: rgb(253, 253, 253);
-    text-decoration: underline;
-}
-
 .songRow:hover {
     background-color: #f7f1f111;
 }
 
 .songMembers:hover a {
     color: #1DB954;
+    text-decoration: underline;
+
 }
 
 .playIconCell {
-    width: 30px;
-    position: relative; /*NAO ENTENDI ESSE POSTION*/
+    width: 50px;
+    position: relative;
+    left: 0;
 }
 
 .playIcon {
-    position: absolute; /*NAO ENTENDI ESSE POSTION*/
-    transform: translate(-50%, -20%);
+    position: relative;
+    right: 10px;
     font-size: 20px;
     opacity: 0;
 }
