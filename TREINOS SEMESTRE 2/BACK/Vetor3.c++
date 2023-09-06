@@ -25,10 +25,10 @@
 //     for(int y=0;y<(2*n);y++){
 
 //         for(int i=0;i<n;i++){
-//             veti[y] = vet[i];
+//             veti[2 * y] = vet[i];
 //     }
 //         for(int j=0;j<n;j++){
-//             veti[y + 1] = vet[j];
+//             veti[2* y + 1] = vet[j];
 //     }
 
 //     for(int l=0;l<(2*n);l++){
@@ -66,7 +66,7 @@ int main()
 
     // Combine elements of vet and vet2 alternatively in veti
     for (int i = 0; i < n; i++) {
-        veti[2 * i] = vet[i];
+        veti[2 * i] = vet[i]; 
         veti[2 * i + 1] = vet2[i];
     }
 

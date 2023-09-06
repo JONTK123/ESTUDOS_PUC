@@ -2,38 +2,36 @@
 <html>
 <head>
     <title>NCS</title>
-    <link href="css/album.css" rel="stylesheet"> <!-- Link para o arquivo CSS -->
+    <link href="css/album.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
 <body>
-    <div id="main"> <!-- Seção principal da página -->
-        <div id="header" class="header"> <!-- Cabeçalho da página -->
-            <div id="cover" class="cover"> <!-- Capa do álbum -->
-                <img src="assets/IMAGES/COVER.jpg" alt="Album Cover"> <!-- Imagem da capa do álbum -->
+    <div id="main">
+        <div id="header" class="header">
+            <div id="cover" class="cover">
+                <img src="assets/IMAGES/COVER.jpg" alt="Album Cover">
             </div>
-            <div id="albumInfo" class="album-info"> <!-- Informações do álbum -->
-                <h1 style="color: white;">Views</h1> <!-- Título do álbum -->
-                <h2 style="color: white;">Drake</h2> <!-- Artista do álbum -->
+            <div id="albumInfo" class="album-info">
+                <h1 style="color: white;">Views</h1>
+                <h2 style="color: white;">Drake</h2>
             </div>
         </div>
 
-        <!-- FAIXAS E PLAYER -->
-        
-        <div id="content" class="content"> <!-- Conteúdo da página -->
-
-            <table id="musicslist" class="music-list"> <!-- Tabela de músicas -->
+        <div id="content" class="content">
+            <table id="musicslist" class="music-list" cellspacing="4" cellpadding="4">
                 <thead>
                     <tr>
                         <th class="centerText">#</th>
-                        <th class="leftText">Title</th> <!-- Título da coluna COLUNA DE TITULO -->
-                        <th class="centerText">Plays</th> <!-- Título da coluna -->
+                        <th class="leftText">Title</th>
+                        <th class="centerText">Plays</th>
                         <th>Duration</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     <tr class="songRow">
-                        <td class="playIconCell"> 1
+                        <td class="playIconCell">
+                            <span class="songNumber">1</span>
                             <i class="fas fa-play playIcon"></i>
                         </td>
                         <td class="leftText">
@@ -43,21 +41,28 @@
                             </p>
                         </td>
                         <td class="centerText">2.757.849.655</td>
-                        <td class="centerText">2:53</td>
+                        <td class="heartIconCell">
+                            <span class="songDuration">2:53</span>
+                            <i class="fas fa-heart heartIcon"></i>
+                        </td>
                     </tr>
 
-                    <tr>
-                        <td class="playIconCell">
+                    <tr class="songRow">
+                        <td class="centerText">
+                            <span class="songNumber">2</span>
                             <i class="fas fa-play playIcon"></i>
                         </td>
                         <td class="leftText">
-                            <p class="songTitleName">Hotline Bling</p>
+                            <p class="songTitleName">One Dance</p>
                             <p class="songMembers">
-                                <a href="#">Drake</a>
+                                <a href="#">Drake, WizKid, Kyla</a>
                             </p>
                         </td>
-                        <td class="centerText">1.226.244.335</td>
-                        <td class="centerText">4:27</td>
+                        <td class="centerText">2.757.849.655</td>
+                        <td class="heartIconCell">
+                            <span class="songDuration">2:53</span>
+                            <i class="fas fa-heart heartIcon"></i>
+                        </td>
                     </tr>
 
                     <!-- Mais linhas da tabela de músicas serão adicionadas aqui -->
@@ -65,11 +70,9 @@
                 </tbody>
             </table>
         </div>
-        
-        <!-- DETALHES E CURIOSIDADES DO ÁLBUM -->
-        
-        <div id="footer" class="footer"> <!-- Rodapé da página -->
-            <p style="color: white;">Informações da empresa</p> <!-- Texto de informações -->
+
+        <div id="footer" class="footer">
+            <p style="color: white;">Informações da empresa</p>
         </div>
     </div>
 </body>
