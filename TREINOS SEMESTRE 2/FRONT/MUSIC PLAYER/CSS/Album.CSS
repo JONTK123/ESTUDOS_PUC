@@ -108,15 +108,17 @@ body { /* Afeta todo o conteudo geral do body no HTML SAO COISAS GERAIS */
 
 .playIconCell {
     width: 30px;
-    position: relative; /*NAO ENTENDI ESSE POSTION*/
+    position: relative;
 }
 
 .playIcon {
-    position: absolute; /*NAO ENTENDI ESSE POSTION*/
-    transform: translate(-50%, -20%);
+    top: 50%; /* Coloque o ícone a 50% da altura da célula */
+    transform: translate(-50%, -50%); /* Centralize o ícone vertical e horizontalmente */
     font-size: 20px;
     opacity: 0;
 }
+
+
 
 .songRow:hover .playIcon {
     opacity: 1;
