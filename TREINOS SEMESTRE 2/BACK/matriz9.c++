@@ -20,7 +20,7 @@ using namespace std;
 
 int main() {
     
-    int n,m;
+    int n,m,i,j;
 
     cout << "Digite a linha da matriz: ";
     cin >> n;
@@ -29,9 +29,13 @@ int main() {
 
     int matriz[n][m];
 
+    if ( n == m){
+        cout<<"Matriz Quadrada\n";
+    
+
     for(i = 0; i < n; i++){ //For das linhas
        for(j = 0; j < m; j++){ //For das colunas
-            cout << "Digite o Elemento [" << (i +1) << "][" << (j + 1) << "]: ";
+            cout << "Digite o Elemento [" << (i + 1) << "][" << (j + 1) << "]: ";
             cin >> matriz[i][j];  
     }
     }
@@ -40,10 +44,11 @@ int main() {
         for (int j = 0;j<m;j++){
             cout << matriz[i][j] << " ";         
     }
+    cout << endl;
     }
 
     cout << endl;
-    
+    }
     return 0;
 }
 

@@ -65,9 +65,10 @@ int main()
     }
 
     // Combine elements of vet and vet2 alternatively in veti
-    for (int i = 0; i < n; i++) {
-        veti[2 * i] = vet[i]; 
-        veti[2 * i + 1] = vet2[i];
+    for (int i = 0, y = 0; i < n; i++, y++) {
+        veti[y] = vet[i];
+        y++;
+        veti[y] = vet2[i];
     }
 
     cout << "\nVetor resultante:\n";
