@@ -16,10 +16,13 @@ int main()
 
     cout<<"Digite o nome da pessoa: ";
 
-    cin.getline ( string,30 );
+    cin.getline ( string,10 );
 
-    for(int i = 0;  strlen(string); i++ ){
-
+    for(int i = 4;  strlen(string); i++ ){
+        cout << "Primeiro: " << string[i];
+        cout << "Segundo: " << string[i + 1];
+        cout << "Penultimo: " << string[strlen(string) - 1];
+        cout << "Ultimo: " << string[strlen(string)];
     }
 
     return 0;

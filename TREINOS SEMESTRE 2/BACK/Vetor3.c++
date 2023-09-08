@@ -65,10 +65,10 @@ int main()
     }
 
     // Combine elements of vet and vet2 alternatively in veti
-    for (int i = 0, y = 0; i < n; i++, y++) {
+    for (int i = 0, y = 0; i < n; i++, y++) { // y != i pois sao logicas de caminhar diferentes, e y++ pois para nunca pegar o mesmo valor ja calculado
         veti[y] = vet[i];
         y++;
-        veti[y] = vet2[i];
+        veti[y + 1] = vet2[i];
     }
 
     cout << "\nVetor resultante:\n";
