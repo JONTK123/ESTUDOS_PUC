@@ -20,6 +20,7 @@ int main()
         } 
 
     } else {
+
         for (int i = 0; i < strlen(string); i++) {
             if (i % 2 == 0) {
                 stringip[i] = string[i + 1];

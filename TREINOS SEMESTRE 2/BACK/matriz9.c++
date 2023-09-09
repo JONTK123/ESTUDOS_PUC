@@ -31,7 +31,7 @@ int main() {
 
     if ( n == m){
         cout<<"Matriz Quadrada\n";
-    
+
 
     for(i = 0; i < n; i++){ //For das linhas
        for(j = 0; j < m; j++){ //For das colunas
