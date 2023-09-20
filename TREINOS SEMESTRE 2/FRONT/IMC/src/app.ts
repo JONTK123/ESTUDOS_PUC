@@ -9,7 +9,6 @@ const port = 3000;
 //Usar dialeto JSON para poder definir o tipo de requisição e funcionar
 app.use(express.json());
 
-
 //Routes of my service
 //app.post("/imc",(req,res)=>{
 

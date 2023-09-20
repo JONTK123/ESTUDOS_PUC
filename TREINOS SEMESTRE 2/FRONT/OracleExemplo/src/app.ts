@@ -11,8 +11,17 @@ app.use(express.json());
 
 
 // Codigo fornecido sera ingenuo
-app.get("/obterAeronaves", (req,res) =>{
+app.get("/obterAeronaves", async(req,res) =>{
     //Buscar aeronaves buscadas no Oracle.
+    //Primeiro Construir o objeto de conexão
+    const connection = await oracledb.getConnection(
+        {
+            user:"admin",
+            //Apenas para testes, vamos deixar a senha aqui
+            password: "XXXX",
+            connectionString: oracleStr,
+        });
+        const result = await connection.execute("SELECT * FROM AERONAVES");
 });
 
 app.put("/incluirAeronaves", (req,res) =>{
