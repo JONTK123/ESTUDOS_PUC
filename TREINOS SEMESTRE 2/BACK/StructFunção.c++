@@ -35,7 +35,7 @@ void ler_vetor( int *n, produto vet[]){
 
     cout << "Digite a quantidade de produtos: ";
     cin >> *n;
-    
+
     for(i=0;i<*n;i++){
         cin >> vet[i].codigo;
         cin.ignore();
@@ -52,7 +52,7 @@ void atualiza_estoque(int n, produto vet[]){
     cin >> codigo;
     for(i=0;i<n;i++){
         if(codigo = vet[i].codigo){
-            cout <<  vet[i].codigo;
+            cout <<  vet[i].codigo << endl;
             cout << "Digite a quantidade de " << vet[i].nome << " compradxs";
             cin >> qntc;
             vet[i].qnt += qntc;
