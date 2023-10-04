@@ -1,14 +1,26 @@
 import express from "express"; //Apelido express, importar funcoes da biblioteca express
 import oracledb from "oracledb";
 import dotenv from "dotenv"; //Criacao de um arquivo separado para senhas e nomes de usuarios
+import cors from "cors"; //usando o módulo de CORS
+
 
 const app = express(); //A variavel APP vai ser responsavel por utilizar as funcoes da biblioteca express
 const port = 3000; //Const = variavel imutavel, let = variavel so para determinada funcao,  
 
 // conexão com o BD.
-const oracleStr = ""; //Comando de conexao da sua conta oracle cloud, string de conexao
+const oracleStr = "(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-saopaulo-1.oraclecloud.com))(connect_data=(service_name=g47f84b910e12c6_bdthiago_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"; //Comando de conexao da sua conta oracle cloud, string de conexao
 
 app.use(express.json()); //Codigo padrao para iniciar os comandos, sei la, vai utilizar os dados do pacote jason
+app.use(cors()); //Requisição de qualquer lugar
+
+dotenv.config(); //Um arquivo com informacoes de usuario e senha do orcale, FORA das funções para ser valido para todas  e nao umas separadas especificas
+
+type CustomResponse = {
+    status:string,
+    message:string,
+    payload: any
+
+}
 
 // O código fornecido será ingênuo.
 app.get("/obterAeronaves", async(req, res)=>{ //A funcao get significa que nao iremos pegar dados de nenhum local, async = rodar num tempo != do tempo do banco de dados
@@ -29,7 +41,7 @@ app.get("/obterAeronaves", async(req, res)=>{ //A funcao get significa que nao i
         result = await connection.execute('SELECT * FROM AERONAVE'); //Atribuir a variavel result, essa funcao do banco que temos que esperar
     }catch (erro){ //Try except, tenta ali mas se nao der ele define uma variavel ERRO
         if (erro instanceof Error){ //se variavel ERRO for um erro conhecido
-            console.log(O detalhamento do erro é: ${erro.message}) //console.log PRINTAR no log ( bloco de texto ) ou ( terminal do vscode ) mas nao mostra isso par ao usuario
+            console.log("O detalhamento do erro é: ${erro.message}" ) //console.log PRINTAR no log ( bloco de texto ) ou ( terminal do vscode ) mas nao mostra isso par ao usuario
         }else{
             console.log("Erro desconhecido") // console.log é uma impressão do log (console) do pc
         }
