@@ -6,18 +6,16 @@ const app = express(); //A variavel APP vai ser responsavel por utilizar as func
 const port = 3000; //Const = variavel imutavel, let = variavel so para determinada funcao,  
 
 // conexão com o BD.
-const oracleStr = ""; //Comando de conexao da sua conta oracle cloud, string de conexao
+const oracleStr = "......."; //Comando de conexao da sua conta oracle cloud, string de conexao
 
 app.use(express.json()); //Codigo padrao para iniciar os comandos, sei la, vai utilizar os dados do pacote jason
 
-// O código fornecido será ingênuo.
 app.get("/obterAeronaves", async(req, res)=>{ //A funcao get significa que nao iremos pegar dados de nenhum local, async = rodar num tempo != do tempo do banco de dados
 
     dotenv.config(); //Um arquivo com informacoes de usuario e senha do orcale
 
-    //o resultado poder ser a lista de aeronaves ou erro.
     let result = undefined; //Variavel que sera usado somente nesta funcao get, dps ela some
-    //Primeiro Construir o objeto de conexão.
+
     const connection = await oracledb.getConnection({ //await espera rodar todo esse bloco de atividades
         // Apenas para testes vamos deixar a senha aqui.
         user: process.env.ORACLE_USER, //Processar o que esta dentro da .env
@@ -47,7 +45,6 @@ app.get("/obterAeronaves", async(req, res)=>{ //A funcao get significa que nao i
         res.send(result);
     }
 });
-
 
 app.put("/incluirAeronave", (req,res)=>{
     // incluir a aeronave no oracle...
