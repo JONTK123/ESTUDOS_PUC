@@ -42,11 +42,16 @@ aluno maior_nota(int n, aluno vet[]){
     for(i=0;i<n;i++){
         if(vet[i].nota > maior){
             maior = vet[i].nota;
-            k = i;
+            k = i; //Salvar posição da onde o aluno com maior nota esta
         }
     }
+    return vet[k]; //Imprime todos os dados do aluno que esta na posição k que é a posição i que possui as infos do aluno com maior nota
+}
 
-    return vet[k];
+void imprime_info(aluno a){
+    cout << a.RA << endl;
+    cout << a.nome << endl;
+    cout << a.nota << endl;
 }
 
 
