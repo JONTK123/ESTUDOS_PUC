@@ -25,7 +25,7 @@ int main()
     vet = (float*) calloc(n, sizeof(float)); // Criacao de um vetor de alocacao dinamica. Seu tamanho sera = n do typo float
 
     for(i=0;i<n;i++){
-        cin >>  vet[i];
+        cin >> vet[i];
     }
 
     menor = &vet[0]; //O valor da variavel menor eh = ao endereco da posicao 0 do vet, menor esta apontando para o endereco da posicao 0 do vet e sera seu valor

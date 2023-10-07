@@ -31,7 +31,7 @@ int* ler_n(int *n){  // *n ponteiro, pois o endereço dele está fora da funçã
     int i;
     int *vet; //Declaração de um ponteiro de vet do tipo inteiro. NAO POSSUI UM ENDEREÇO AINDA
 
-    cout << "Digite quantas notas deseja ler: \n";
+    cout << "Digite quantas notas deseja ler 10 POR FAVOR EU IMPLORO: \n";
     cin >> *n;
 
     vet = (int *)malloc(*n * sizeof(int)); //Alocação dinamica do ponteiro vet, criação de um vetor, não utiliza PONTEIRO * pois agora ele possui um ENDEREÇO
@@ -45,13 +45,29 @@ int* ler_n(int *n){  // *n ponteiro, pois o endereço dele está fora da funçã
 
 }
 
-int nota_repete(int n, int *vet_oficial){
-    int notas[11] = {0,1,2,3,4,5,6,7,8,9,10};
-    CALCULAR O QUE REPETE
+int nota_repete(int n, int *vet){
+    int frequencia[11] = {0}; //Terceiro vetor das 11 notas ( 0 a 10 ) iniciando todos os valores com 0
+    int nota_mais_repetida;
+    int mais_repetida = 0;
+
+    for (int i = 0; i < n; i++) { //Assumindo que o usuario insira 10 notas:
+        frequencia[vet[i]]++; 
+    }
+
+    for (int i = 0; i < 11; i++) { // Percorra todas as notas de 0 a 10
+        if (frequencia[i] > frequencia[mais_repetida]) { // Verifique se a frequência é maior que a maior frequência atual
+            mais_repetida = i; // Se sim, atualize a nota mais repetida
+        }
+    }
+    return mais_repetida;
 }
 
-void imprime-vetor(){
-
+void imprime_vetor(int n, int *vet){
+    cout << "Elementos do vetor:" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << vet[i] << " ";
+    }
+    cout << endl;
 }
 
 int main()
@@ -63,6 +79,11 @@ int main()
 
     vet_oficial = ler_n(&n); //Atribuição de endereço para a variavel, vet_oficial
     nota_repetida = nota_repete(n,vet_oficial); //n agora ja possui um um valor atrelado ao seu endereço atraves do endereço + envio do endereço do vet_oficial para usarmos na função
+    imprime_vetor(n,vet_oficial);
+
+    cout << "A nota que mais se repete é: " << nota_repetida << endl;
+
+    free(vet_oficial);
 
     return 0;
 }
@@ -70,5 +91,26 @@ int main()
 
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
