@@ -72,7 +72,6 @@ void imprime_vetor(int n, int *vet){
 
 int main()
 {
-   
     int n;
     int *vet_oficial; //Criação de uma variavel ponteiro *vet do tipo inteiro pois ira apontar para o endereço
     int nota_repetida; //Criação de uma variavel normal pois ela indicara apenas a nota que mais repetiu. SEM PONTEIRO NEM NADA
