@@ -1,4 +1,4 @@
-/***
+/*
  * >>>>>>> MUITA ATENÇÃO <<<<<<<<
  * Este código é extremamente repetitivo, para iniciantes.
  * Cabe a você estudante melhorá-lo. 
@@ -13,7 +13,7 @@ import oracledb, { Connection, ConnectionAttributes } from "oracledb";
 import dotenv from "dotenv";
 
 // usando o módulo de CORS
-import cors from "cors"; // ???????????????????????????????????????????????????????????????????????????
+import cors from "cors";
 
 // preparar o servidor web de backend na porta 3000
 const app = express();
@@ -35,27 +35,38 @@ type CustomResponse = {
 };
 
 
-
-// servicos de backend
-app.get("/listarAeronaves", async(req,res)=>{
-
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
-
-  try{
+async function setupDatabaseConnection() {
+  try {
     const connAttibs: ConnectionAttributes = {
       user: process.env.ORACLE_DB_USER,
       password: process.env.ORACLE_DB_PASSWORD,
       connectionString: process.env.ORACLE_CONN_STR,
     }
     const connection = await oracledb.getConnection(connAttibs);
+    return connection;
+  } catch (e) {
+    console.error("Erro ao configurar a conexão com o Oracle:", e);
+    throw e;
+  }
+}
+
+// servicos de backend
+app.get("/listarAeronaves", async(req,res)=>{
+
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,}; //variavel "let" vai sumir depois.
+
+  const connection = await setupDatabaseConnection();
+  try{
     let resultadoConsulta = await connection.execute("SELECT * FROM AERONAVES");
+
+    cr.status = "SUCESS"
   
-    await connection.close();
-    cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
+
     cr.payload = resultadoConsulta.rows;
 
-  }catch(e){
+  }
+  catch(e){
     if(e instanceof Error){
       cr.message = e.message;
       console.log(e.message);
@@ -63,7 +74,8 @@ app.get("/listarAeronaves", async(req,res)=>{
       cr.message = "Erro ao conectar ao oracle. Sem detalhes";
     }
   } finally {
-    res.send(cr);  
+    await connection.close();
+    res.send(cr);
   }
 
 });
@@ -88,15 +100,9 @@ app.put("/inserirAeronave", async(req,res)=>{
     payload: undefined,
   };
 
-  let conn;
-
+  const connection = await setupDatabaseConnection();
   // conectando 
   try{
-    conn = await oracledb.getConnection({
-       user: process.env.ORACLE_DB_USER,
-       password: process.env.ORACLE_DB_PASSWORD,
-       connectionString: process.env.ORACLE_CONN_STR,
-    });
 
     const cmdInsertAero = `INSERT INTO AERONAVES 
     (CODIGO, MARCA, MODELO, NUMERO_ASSENTOS, REGISTRO)
@@ -104,10 +110,10 @@ app.put("/inserirAeronave", async(req,res)=>{
     (SEQ_AERONAVES.NEXTVAL, :1, :2, :3, :4)`
 
     const dados = [marca, modelo, qtdeAssentos, registro];
-    let resInsert = await conn.execute(cmdInsertAero, dados);
+    let resInsert = await connection.execute(cmdInsertAero, dados);
     
     // importante: efetuar o commit para gravar no Oracle.
-    await conn.commit();
+    await connection.commit();
   
     // obter a informação de quantas linhas foram inseridas. 
     // neste caso precisa ser exatamente 1
@@ -126,8 +132,8 @@ app.put("/inserirAeronave", async(req,res)=>{
     }
   } finally {
     //fechar a conexao.
-    if(conn!== undefined){
-      await conn.close();
+    if(connection!== undefined){
+      await connection.close();
     }
     res.send(cr);  
   }
@@ -144,15 +150,12 @@ app.delete("/excluirAeronave", async(req,res)=>{
     payload: undefined,
   };
 
+  
+  const connection = await setupDatabaseConnection();
   // conectando 
   try{
-    const connection = await oracledb.getConnection({
-       user: process.env.ORACLE_DB_USER,
-       password: process.env.ORACLE_DB_PASSWORD,
-       connectionString: process.env.ORACLE_CONN_STR,
-    });
 
-    const cmdDeleteAero = `DELETE AERONAVES WHERE codigo = :1`
+    const cmdDeleteAero = DELETE AERONAVES WHERE codigo = :1
     const dados = [codigo];
 
     let resDelete = await connection.execute(cmdDeleteAero, dados);
@@ -161,7 +164,6 @@ app.delete("/excluirAeronave", async(req,res)=>{
     await connection.commit();
   
     // encerrar a conexao. 
-    await connection.close();
     
     // obter a informação de quantas linhas foram inseridas. 
     // neste caso precisa ser exatamente 1
@@ -182,7 +184,8 @@ app.delete("/excluirAeronave", async(req,res)=>{
     }
   } finally {
     // devolvendo a resposta da requisição.
-    res.send(cr);  
+    await connection.close();
+    res.send(cr);
   }
 });
 

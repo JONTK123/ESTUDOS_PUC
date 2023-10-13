@@ -30,15 +30,15 @@
                 // varrer o array com os dados e
                 // a cada elemento do array acrescentar ua linha
                 // na tabela obedecendo se ela eh par ou impar
-                console.log('Botão carregar dados clicado...');
+                    const alunos = fetchAlunos();
+                    console.log(alunos)
 
-                const alunos = fetchAlunos(); // Const pois o vetor nao vai mudar
-                let dados = document.getElementByid("tblDadosAlunos")
-                let count = 0;
-                let estilo = "linhaPar"
-                let linha = "";
-                
-                alunos.forEach((a)=>{ // PARA CADA elemento na lista ALUNOS, varrer e botar na tabela como linha
+                    let count = 0;
+                    let estilo ="linhaPar";
+                    let linha = "";
+                    let tbody = document.getElementById("tbAlunosDados");
+                    
+                    alunos.forEach((aluno)=>{ // PARA CADA elemento na lista ALUNOS, varrer e botar na tabela como linha
                     // Vou mapear cada aluno para uma nova linha.
                    
                     if(count % 2 === 0)
@@ -55,7 +55,7 @@
 
                     tbody.innerHTML += linha;
                     console.log(linha);
-
+                    console.log(count);
 
                     count = count + 1;
                 });
