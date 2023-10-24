@@ -1,0 +1,268 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+typedef struct {
+   int ra;
+   char nome[31];
+   float nota;
+
+}aluno;
+
+typedef aluno elemento;
+
+typedef struct no{
+    elemento info;
+    no * link;
+}no;
+
+no* init();
+no* novo_no();
+int comp (no**);
+
+void inserir_inicio(no**pri, elemento a);
+void inserir_final(no**pri, elemento a);
+
+
+///funções que dependem do problema - 
+/// pode ser geral se usado como campo de ordenação: chave primária
+/// AS estruturas sempre terão um campo com o nome: CHAVE
+/// as comparações seriam, por exemplo:
+///  a.CHAVE > p->info.CHAVE
+
+void inserir_ordem_ra (no**, elemento);
+int eliminar_ordem_ra(no **, elemento);
+int eliminar_desordenada_ra(no ** , elemento);
+
+
+
+///-----------------------------------------------------------------------
+/// inicia a estrutura vazia
+///-----------------------------------------------------------------------
+no* init(){
+    return NULL;
+}
+///-----------------------------------------------------------------------
+/// aloca espaço para um novo nó
+///-----------------------------------------------------------------------
+no* novo_no (){
+    no* novo;
+    novo = (no*) malloc(sizeof(no));
+    if(novo == NULL) {
+       cout<<"\n ERRO: alocacao de memoria!" ;
+       exit(1);
+       }
+    return novo;
+}
+///-----------------------------------------------------------------------
+/// conta o número de nós na lista e retorna o valor - comprimento da lista
+///-----------------------------------------------------------------------
+int comp(no*pri){
+    int conta;
+    for(conta=0;pri!=NULL;pri=pri->link) conta++;
+    return conta;
+}
+///-----------------------------------------------------------------------
+/// cria um novo nó e insere no início da lista
+///-----------------------------------------------------------------------
+void inserir_inicio(no**pri, elemento a){
+
+    no*novo=novo_no();
+
+    novo->info=a;
+    novo->link=*pri;
+    *pri = novo;
+}
+
+
+///-----------------------------------------------------------------------
+/// cria um novo nó e insere no final da lista
+///-----------------------------------------------------------------------
+
+void inserir_final(no ** pri, elemento a){
+    no* novo, *p; // declaração do novo nó e do ponteiro que percorre a lista
+    novo = novo_no(); // atribuição do novo nó
+    novo->info = a; // atribuição de valor para o novo nó
+    novo->link = NULL; // atribuindo NULL ao link do último nó (pois ele será o último)
+    p = *pri; // atribuindo o ponteiro que percorre ao primeiro elemento da lista
+    while(p!=NULL && p->link != NULL) // enquanto p e seu proximo nao forem nulos
+        p = p->link; // p passa a ser seu proximo (apenas se o proximo nao for o último)
+    if(p == NULL) // caso p seja NULL (não entrou no while)
+        *pri = novo; // atribue o novo como primeiro da lista (SÓ ACONTECE NA INSERÇÃO DO PRIMEIRO ELEMENTO!!)
+    else p->link = novo; // caso não seja o primeiro elemento e foi adicionado ao final com sucesso, o antigo último recebe o endereço do novo último
+}
+
+///-----------------------------------------------------------------------
+/// cria um novo nó e insere na oredem crescente de RA
+///-----------------------------------------------------------------------
+
+void inserir_ordem_ra (no ** pri, elemento a){
+    no* novo, *p, *anterior;
+    anterior = NULL;
+    novo = novo_no();
+    novo->info = a;
+
+    p = *pri;
+    while(p!=NULL &&a.ra > p->info.ra){
+        anterior = p;
+        p=p->link;
+    }
+    if(p == *pri)  *pri = novo;
+    else  anterior->link=novo;
+
+    novo->link = p;
+}
+///-----------------------------------------------------------------------
+/// busca por RA e elimina um nó de lista ordenada por RA
+///-----------------------------------------------------------------------
+
+
+int eliminar_ordem_ra (no ** pri, elemento a){
+    no* p, *anterior;
+    anterior = NULL;
+    p=*pri;
+    while(p != NULL && a.ra>p->info.ra)
+    {
+        anterior = p;
+        p=p->link;
+    }
+    if(p==NULL || p->info.ra != a.ra)
+        return 0; ///nao existe
+
+    if (p == *pri)
+        *pri = p->link;
+    else
+        anterior->link = p->link;
+   free(p);
+   return 1;/// sucesso
+}
+
+///-----------------------------------------------------------------------
+/// busca por RA e elimina um nó de lista desordenada
+///-----------------------------------------------------------------------
+
+int eliminar_desordenada_ra(no ** pri, elemento a){
+    no* p, *anterior=NULL;
+    if(*pri == NULL) return -1; ///lista vazia
+    p=*pri;
+    while(p != NULL && p->info.ra != a.ra){
+        anterior = p;
+        p=p->link;
+    }
+    if(p==NULL) return 0; ///nao existe
+    if (p == *pri)
+        *pri = p->link;
+    else
+        anterior->link = p->link;
+   free(p);
+   return 1;/// sucesso
+}
+
+///-----------------------------------------------------------------------
+/// imprime dados de alunos - especifica ao problema ALUNO
+///-----------------------------------------------------------------------
+
+void imprime_aluno(no*pri){
+    no*  p;
+    p = pri;
+    while(p != NULL)    {
+        cout<< " -> || "<< p->info.ra;
+        cout<< " | " << p->info.nome;
+        cout<< " | " << p->info.nota<<" || ";
+        p = p->link;
+    }
+}
+
+///-----------------------------------------------------------------------
+/// faz a impressão de uma lista (CAIO)
+///-----------------------------------------------------------------------
+
+void imprimir_lista(no* pri) {
+    int i=1;
+    no* p = pri;
+    cout << "\nLista: " << endl;
+    while(p!=NULL) {
+    cout << "Elemento " << i << " da lista: "<< p->info << endl;
+    p=p->link;
+    i++;
+    }
+}
+
+///-----------------------------------------------------------------------
+/// gera um numero inteiro aleatorio no intervalo definido e envia pelo return (CAIO)
+    //OBS: bibliotecas:
+    //#include <stdlib.h>// necessário p/ as funções rand() e srand()
+    //#include <time.h>//necessário p/ função time()
+    //srand(time(NULL));
+///-----------------------------------------------------------------------
+
+int gerar_inteiro() {
+    int numero_aleatorio = (rand() % (50 - 1 +1)) +1;
+    return numero_aleatorio;
+}
+
+///-----------------------------------------------------------------------
+/// faz a leitura de dados de UM aluno - especifica ao problema ALUNO
+///-----------------------------------------------------------------------
+elemento ler_aluno(){
+    elemento a;
+    cout<<"\n>>RA: "; cin>>a.ra;
+    cin.ignore();
+    cout<<">>Nome:";cin.getline(a.nome,31);
+    cout<<">>Nota: "; cin>>a.nota;
+    return a;
+}
+///-------------------------------------------------------------------------
+/// função principal contem as VARIÁVEIS DO PROBLEMA  ecoordena o fluxo de execução do problema
+///
+///obs.: há várias funções construídas para que usem quando precisarem nos exercícios. 
+///      A main() abaixo chamou apenas as demonstradas em aula.
+///      passe para um compilador e faça seus testes. Construa um menu() com as várias operações.
+///
+///SUGESTÕES: 
+///      1.   NÃO modifique as funções já criadas - usaremos em nossas atividades, como foram 
+///           dadas.  Crie as suas próprias. Mas, procure não misturar funcionalidades. Cada 
+///           função deve fazer uma coisa em específico.
+///      2.   Crie e Recrie funções, por exemplo:
+///                 a. recrie as funções específicas ao problema, considerando o campo CHAVE;
+///                 b. crie a função que buscar um ALUNO, pelo campo chave e retorna o ENDEREÇO onde está na lista, se achou
+///                    e, se não achou, retorne NULL; Esta função é útil para as validações. 
+/// -----------------------------------------------------------------------                 
+ 
+int main()
+{
+
+
+    no * pri;
+
+    pri = init();
+
+    elemento valor;
+
+    int N;
+
+   cout<<"\n Numero de elementos na Lista: ";
+   cin>> N;
+   cout<< "\n Elementos: ";
+   for(int i=0; i<N; i++){
+
+       cout<< "\n Valor: "; 
+       valor = ler_aluno();
+       inserir_inicio(&pri, valor);
+
+       cout<< "\n LISTA ->  ";
+       imprime_aluno(pri);
+    }
+    /// ----------------------------------------------------------
+    /// embora no exemplo, sabemos que são 3 elementos na lista,
+    /// a chamada abaixo, está apenas para mostrar o uso da função.
+    /// ----------------------------------------------------------
+    cout << "\n\n>>> Numero de Alunos: "<< comp(pri);
+    free(pri);
+
+    cout<<"\n\n\n";
+    return 0;
+}
+
+
