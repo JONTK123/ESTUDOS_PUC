@@ -46,25 +46,22 @@ void inserir_ordenado(no* *pri, elemento a) {
     novo->link=p; // de qualquer maneira, o link do novo elemento recebe o elemento atual
 }
 
-int verifica(no* pri) {
-    no *p = pri;
+int verifica(no* *pri) {
+    no *p;
+    no *q;
+
+    p = *pri
     while(p!=NULL) {
-        no *q = p->link;
-        cout << p->info << endl;
-
-        while(q!=NULL) {
-            if(p->info==q->info) {
-                return 1;
-            }
-            q=q->link;
+        q = p->link;
+            if (q != null )
+                if(p->info==q->info) {
+                    return 1;
+            else }
+                p = q 
         }
-        p=p->link;
-
-    }
     return 0;
 }
    
-
 int main() {
     no * pri;
     pri = init();
