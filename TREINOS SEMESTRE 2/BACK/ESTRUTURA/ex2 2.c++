@@ -26,8 +26,6 @@ no* novo_no (){
     return novo;
 }
 
-
-
 void insere_ordenado(no **pri, elemento x) {
     no *anterior;
     no *p; //Variavel para percorrer a lista ligada JA EXISTENTE
