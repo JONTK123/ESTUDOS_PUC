@@ -49,16 +49,17 @@ void inserir_ordenado(no* *pri, elemento a) {
 int verifica(no* *pri) {
     no *p;
     no *q;
+    p = *pri;
 
-    p = *pri
     while(p!=NULL) {
         q = p->link;
-            if (q != null )
+            if (q != NULL ){
                 if(p->info==q->info) {
                     return 1;
-            else }
-                p = q 
+                 } else 
+                p = q;
         }
+    }
     return 0;
 }
    
@@ -73,7 +74,7 @@ int main() {
     inserir_ordenado(&pri, 2);
 
     
-    int num=verifica(pri);
+    int num=verifica(&pri);
 
     if(num==1) {
         cout << "Existem elementos repetidos";

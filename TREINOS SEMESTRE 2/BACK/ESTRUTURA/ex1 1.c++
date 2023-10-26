@@ -32,7 +32,7 @@ int comp(no*pri){
     return conta;
 }
 
-void inserir_inicio(no**pri){ // Insere um novo nó no início da lista
+void inserir_inicio(no**pri){ // Recebe o ponteiro do ponteiro de pri, que aponta para o primeiro ponteiro. Usaremos ele para udar seu valor sem mudar seu endereço definitivo 
 
     no*novo=novo_no(); // criação de um novo nó
 
@@ -42,13 +42,13 @@ void inserir_inicio(no**pri){ // Insere um novo nó no início da lista
     novo->link=*pri; // Aponta ponteiro link para o poteiro de *pri. Ponteiro de pri carrega as informações do primeiro nó
     *pri = novo; // Agora o NOVO nó se torna o primeiro para continuar as ligações
 }
-
+                                          
 int main() {
     int i; // Index para o FOR
     no *pri; // Primeiro Nó da lista
     pri = init(); // Inicia o Nó vazio
     for(i=0;i<4;i++){ // Coloca 4 nós na lista
-        inserir_inicio(&pri); // Insere nó na lista
+        inserir_inicio(&pri); // Enviamos o endereço do ponteiro de pri, para mudarmos o seu valor sem dar para ele um endereço definitivo
     }
     int conta=comp(pri); // Retorna o tamanho da lista ligada.
     cout << "Total de numeros: " << conta;
