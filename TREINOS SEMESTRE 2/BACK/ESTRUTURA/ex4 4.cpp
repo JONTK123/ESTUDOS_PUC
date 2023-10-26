@@ -25,112 +25,42 @@ no *novo_no (){
     return novo;
 }
 
-void contar_lista(no**pri){
-    no *p;
-    no *novo;
-    int contador1=0;
-    int contador2=0;
-    int contador3=0;
-    int contador4=0;
-    int contador5=0;
-    int contador6=0;
-    int contador7=0;
-    int contador8=0;
-    int contador9=0;
-    int contador10=0;
+int *contar_lista(no** pri){
 
-    p = *pri;
+    int* contador = (int*) malloc(10 * sizeof(int)); 
+    // int contador[10] = {0};     
+    no *p = *pri;
+
     while(p != NULL){
-        if (p->info == 1){
-            contador1++;
+        if(p->info >= 0 && p->info <= 9){ 
+            contador[p->info]++; 
         }
-        if (p->info == 2){
-            contador2++;
-        }
-        if (p->info == 3){
-            contador3++;
-        }
-        if (p->info == 4){
-            contador4++;
-        }
-        if (p->info == 5){
-            contador5++;
-        }
-        if (p->info == 6){
-            contador6++;
-        }
-        if (p->info == 7){
-            contador7++;
-        }
-        if (p->info == 8){
-            contador8++;
-        }
-        if (p->info == 9){
-            contador9++;
-        }
-        if (p->info == 10){
-            contador10++;
-        }
-
-        p=p->link???
+        p = p->link; 
     }
-
-        novo = novo_no();
-        novo->info=contador1;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador2;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador3;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador4;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador5;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador6;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador7;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador8;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador9;
-        novo->link=*pri;
-        *pri=novo;
-
-        novo = novo_no();
-        novo->info=contador10;
-        novo->link=*pri;
-        *pri=novo;
+    return contador; 
 }
+
+void nova_lista(no**pri, int a){
+
+    no*novo=novo_no();
+    novo->info=a;
+    novo->link=*pri;
+    *pri = novo;
+}
+
 
 int main() {
     no * pri;
+    int *a;
     pri = init();
 
-    contar_lista(&pri);
+    a = contar_lista(&pri);
+
+    for (int i=0;i<+9;i++){
+        nova_lista(&pri, a[i]);
+    }
+
+    free(a); 
 
     return 0;
 }
