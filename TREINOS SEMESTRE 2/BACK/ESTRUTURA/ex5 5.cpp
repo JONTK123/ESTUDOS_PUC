@@ -26,23 +26,24 @@ no *novo_no (){
 void criar_lista(no**pri){
     no* novo;
     no* p;
-    novo = novo_no();
     elemento a;
     int b=1,c=1;
+    a=1;
 
-    a = ((b+=2)/c++);
-
-    p=*pri;
-    while(p!=NULL){
+    for(int i=0;i<10;i++){ //10 nos na lista ligada
+        a = ((b+=2)/c++);
         novo = novo_no();
         novo->info = a;
-        novo->link=*pri; 
+        novo->link = *pri;
+        *pri = novo;
     }
 }
 
 int main() {
     no * pri;
     pri = init();
+
+    criar_lista(&pri);
 
     return 0;
 }
