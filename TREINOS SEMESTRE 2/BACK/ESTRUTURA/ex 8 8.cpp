@@ -51,8 +51,7 @@ void inserir_ordenado(no* *pri) {
 
 no* separar_pares(no* *pri) {
     no *p = *pri;
-    no *pares = init(); // Inicializa a lista de pares como vazia
-    no *pares_head = pares; // Cabeça da lista de pares
+    no *pares_pri = init();
 
     while (p != NULL) {
         if (p->info % 2 == 0) {
@@ -60,25 +59,22 @@ no* separar_pares(no* *pri) {
             novo->info = p->info;
             novo->link = NULL;
 
-            if (pares == NULL) {
-                pares = novo;
-                pares_head = pares;
+            if (pares_pri == NULL) {
+                pares_pri = novo;
             } else {
-                pares->link = novo;
-                pares = pares->link;
+                pares_pri->link = novo;
+                pares_pri = pares_pri->link;
             }
         }
         p = p->link;         
     }
     
-    return pares_head; // Retorna a cabeça da lista de pares
+    return pares_pri; 
 }
 
-// Função para separar números ímpares em uma lista ligada separada
 no* separar_impares(no* *pri) {
     no *p = *pri;
-    no *impares = init(); // Inicializa a lista de ímpares como vazia
-    no *impares_head = impares; // Cabeça da lista de ímpares
+    no *impares_pri = init(); 
 
     while (p != NULL) {
         if (p->info % 2 != 0) {
@@ -86,18 +82,17 @@ no* separar_impares(no* *pri) {
             novo->info = p->info;
             novo->link = NULL;
 
-            if (impares == NULL) {
-                impares = novo;
-                impares_head = impares;
+            if (impares_pri == NULL) {
+                impares_pri = novo;
             } else {
-                impares->link = novo;
-                impares = impares->link;
+                impares_pri->link = novo;
+                impares_pri = impares_pri->link;
             }
         }
         p = p->link;
     }
     
-    return impares_head; // Retorna a cabeça da lista de ímpares
+    return impares_pri;
 }
 
 int main() {
