@@ -20,6 +20,11 @@
 
 //Collections 67 - 68
 
+//map: Transforma cada elemento da coleção usando uma função e retorna uma nova coleção com os resultados.
+//filter: Retorna uma nova coleção contendo apenas os elementos que satisfazem a condição especificada em uma função.
+// groupBy: Agrupa os elementos da coleção em mapas com base em uma função de chave.
+// forEach: Executa uma ação para cada elemento da coleção sem retornar um valor.
+
 //read-only list - listOf() function.
 //mutable list - mutableListOf() function.
 
@@ -301,41 +306,116 @@
 
 //em Lambda ficaria assim
 
-fun main() {
-    println({frase: String -> frase.toUpperCase()}("Oi tudo bem")) //-> lambda faz escrever a funcao oinline na main? 
-}
+// fun main() {
+//     println({frase: String -> frase.toUpperCase()}("Oi tudo bem")) //-> lambda faz escrever a funcao oinline na main? 
+// }
 
-//Outro exemplo, passando o retorno da funcao inline para a variavel
+// //Outro exemplo, passando o retorno da funcao inline para a variavel
 
-fun main() {
-    val letranova = {frase: String -> frase.toUpperCase()}
-    println(letranova("Oi tudo bem"))
+// fun main() {
+//     val letranova = {frase: String -> frase.toUpperCase()}
+//     println(letranova("Oi tudo bem"))
 
-    //OU
+//     //OU
 
-    val letranova = {it.toUpperCase()} 
-    println(letranova("Oi tudo bem"))
+//     val letranova = {it.toUpperCase()} 
+//     println(letranova("Oi tudo bem"))
+// }
 
-}
+// //Outro exemplo -> ainda mais conciso
 
-//Outro exemplo -> ainda mais conciso
+// fun main() {
+//     val numbers = lisrfOf(1,2,3,4,5)
+//     val positives = numbers.filter { x -> x > 0 } //-> FILTER se ujsa com expressoes lambda, devemos sempre declarar a variavel que usaremos no corpo pelo menos uma vez, se nao, usar o it 
+//     // val positives = numbers.filter { it > 0 } 
+//     println(positives)
+// }
 
-fun main() {
-    val numbers = lisrfOf(1,2,3,4,5)
-    val positives = number.filter { x -> x > 0 } //-> FILTER se ujsa com expressoes lambda
-    println(positives)
-}
+// //Definindo uma expressao lambda para uma variavel ( maneira + rapida e curta de escrever funcao )
 
-//Definindo o tipo da variavel como funcao e passando a funcao lambda para ela
+// //Variavel + funcao que espera como parametro um Grande e retorna uma String
+// val palavraGrande: (Grande) -> String = {it.toUpperCase()}//Modo rapido , it = palavra do momento que sera usada como parametro = Grande
 
-//Variavel + funcao que espera como parametro um Grande e retorna uma String
-val palavraGrande: (Grande) -> String = {it.toUpperCase()}//Modo rapido , it = palavra do momento que sera usada como parametro = Grande
+// //OU
 
-//OU
+// val palabraGrande: (Grande) -> String = {Palavra: String -> Palavra.toUpperCase()}//Modo lento, palabra do momento que sera usada como parametro = Grande
 
-val palabraGrande: (Grande) -> String = {Palavra: String -> Palavra.toUpperCase()}//Modo lento, palabra do momento que sera usada como parametro = Grande
+// //OUTRO EXEMPLO
 
-fun main() {
-    println(palavraGrande("oi tudo bem"))
-}
+// val calcularQuadrado: (Int) -> Int = { numero -> numero * numero } // -> (int) = tipo do parametro
 
+// // Uso:
+// val resultado = calcularQuadrado(5) // Resultado será 25
+
+
+// fun main() {
+//     println(palavraGrande("oi tudo bem"))
+// }
+
+// //Retornando lambda em uma funcao ( 2 funcoes em uma )
+
+// // ???? po, vou pular agora pqp, depois eu vejo, mas ta ai o  exemplo
+
+// fun main() {
+//     //sampleStart
+//     // The initial value is zero.
+//     // The operation sums the initial value with every item in the list cumulatively.
+//     println(listOf(1, 2, 3).fold(0, { x, item -> x + item })) // 6
+//     // Alternatively, in the form of a trailing lambda
+//     println(listOf(1, 2, 3).fold(0) { x, item -> x + item }) // 6
+
+// -----------------------------------------------
+// -----------------------------------------------
+
+//CLass 83 - 88
+
+//Funcoes dentro de classes
+
+// class Contact(val name: String, val age: Int) {
+//     fun printIdade() {
+//         println("A idade de $name é $age")
+//     }
+// }
+
+// fun main(){
+//     val contact = Contact("Thiago", 20)
+//     Contact.printIdade() //-> a funcao eh um atributo da classe Contact
+// }
+
+// //Data class -> apenas salvam dados nao executam nada complexo mas existem diversas funcoeszinhas para fazermos com ela como
+// //copy, equals, hashcode, toString
+
+// data class Aluno(val RA: String, val nome: String)
+
+// fun main() {
+//     usuario1 = Aluno("RA23010116", "Thiago Fossa")
+//     usuario2 = Aluno("RA23014234", "Wukong Suporte")
+
+//     print(usuario1)
+    
+//     // OU
+
+//     //print(usuario1.toString())
+
+//     println("O usuario 1 eh igual ao 2? ${usuario1 == usuario2}")
+
+//     println(usuario1.copy(nome = "Jailson Mendes")) //-> copiamos mas so mudamos o seu valor
+// }
+
+// // -----------------------------------------------
+// // -----------------------------------------------
+
+// //Null 88 - 90
+
+// /var nome: String = null //-> nao pode ser nulo
+
+//  var nome: String? = null //-> pode ser nulo
+
+//  var nome: String? = "Thiago" //-> pode ser nulo
+
+//  //Elvis Operator
+
+//  val nome: String? = null
+//  val nomeNaoNulo = nome ?: "Valor Padrão"
+
+// println(nomeNaoNulo) // Saída: Valor Padrão
