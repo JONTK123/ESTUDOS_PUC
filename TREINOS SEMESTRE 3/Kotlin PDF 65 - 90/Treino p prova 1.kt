@@ -24,6 +24,7 @@
 //filter: Retorna uma nova coleção contendo apenas os elementos que satisfazem a condição especificada em uma função.
 // groupBy: Agrupa os elementos da coleção em mapas com base em uma função de chave.
 // forEach: Executa uma ação para cada elemento da coleção sem retornar um valor.
+//Find?
 
 //read-only list - listOf() function.
 //mutable list - mutableListOf() function.
