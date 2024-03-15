@@ -1,3 +1,5 @@
+REVER ARRAYS, INTEGERS NAO ASSINADOS E STRINGS
+
 Basic types
 Integer types - TIPOS INTEGER PADROES
 
@@ -175,4 +177,159 @@ fun main() {
 
 
 Arrays
+Arrays sao mutaveris mas nao possuem add() remove() contains()?
+Lists tem mais opcoes que arrays em questao de maniuplacao mas ainda sim arrays tem algumas
+Para adicionar elemntos ou remover, eh preciso repetidamente criar arrays novos aop invez de simplemente usar list.remove()
 
+Tipos de array
+fun main() {
+		var riversArray = arrayOf("Nile", "Amazon", "Yangtze") 
+		//Ou var riversArray: Array<String> = arrayOf("Nile", "Amazon", "Yangtze")
+		riversArray += "Mississippi"
+		println(riversArray.joinToString()) //Join to string transofrma em comentariop
+		// Nile, Amazon, Yangtze, Mississippi
+}
+
+var exampleArray = emptyArray<String>()
+
+Criando um array 
+		fun main() {
+		val nullArray: Array<Int?> = arrayOfNulls(3)
+		println(nullArray.joinToString())
+		// null, null, null
+}
+
+Definindo tamanho de array
+fun main() {
+		val initArray = Array<Int>(3) { 0 } //Ao criar um array com tamanho especifico deve-ser usar  Array<3>
+		println(initArray.joinToString())
+		// 0, 0, 0
+}
+
+Nested arrays - Array com array dentro
+Funciona com uma expressao lambda 
+fun main() 
+		val twoDArray = Array(2) { Array<Int>(2) { 0 } }
+		println(twoDArray.contentDeepToString())
+		// [[0, 0], [0, 0]]
+		val threeDArray = Array(3) { Array(3) { Array<Int>(3) { 0 } } }
+		println(threeDArray.contentDeepToString())
+		// [[[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]]]
+		}
+		
+array Transforms 
+SUM
+fun main() {
+		//sampleStart
+		val sumArray = arrayOf(1, 2, 3)
+		// Sums array elements
+		println(sumArray.sum())
+		// 6
+		//sampleEnd
+}
+
+Shuffle
+fun main() {
+		//sampleStart
+		val simpleArray = arrayOf(1, 2, 3)
+		// Shuffles elements [3, 2, 1]
+		simpleArray.shuffle()
+		println(simpleArray.joinToString())
+		// Shuffles elements again [2, 3, 1]
+		simpleArray.shuffle()
+		println(simpleArray.joinToString())
+		//sampleEnd
+		}
+		
+Transformar em List ou Set
+fun main() {
+		//sampleStart
+		val simpleArray = arrayOf("a", "b", "c", "c")
+		// Converts to a Set
+		println(simpleArray.toSet())
+		// [a, b, c]
+		// Converts to a List
+		println(simpleArray.toList())
+		// [a, b, c, c]
+		//sampleEnd
+}
+
+Transformar em Map
+SOMENTE SE O ARRAY FOR MONTADO COMO UQE FOSSE UM MAP/DICIONARIO
+fun main() {
+		//sampleStart
+		val pairArray = arrayOf("apple" to 120, "banana" to 150, "cherry" to 90, "apple" to 140)
+		// Converts to a Map
+		// The keys are fruits and the values are their number of calories
+		// Note how keys must be unique, so the latest value of "apple"
+		// overwrites the first
+		println(pairArray.toMap())
+		// {apple=140, banana=150, cherry=90}
+		//sampleEnd
+}
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+
+Checks and Casts
+Verificar ou dar um tipo dinamicamente para uma variavel
+
+if (obj is String) {
+		print(obj.length)
+}
+
+if (obj !is String) { // Same as !(obj is String)
+	print("Not a String")
+} else {
+	print(obj.length)
+}
+
+Smart Cast
+fun demo(x: Any) {
+	if (x is String) { //x agora eh um String e sera tratado como um
+print(x.length) 
+	}
+}
+
+if (x is String && x.length > 0) {
+print(x.length) // x is automatically cast to String
+}
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+
+Conditional Expressions
+If, When - Ja vi, iguais de sempre
+For - Ja vi tambem mas so alguns remembers
+While - Ja vi tambem mas so alguns remembers
+
+For
+Range - de 1 ate 3 mas pode ser tambem de 1 ate n
+Pode conter step e downTo
+fun main() 
+		for (i in 1..3) { 
+				println(i)
+		}
+		for (i in 6 downTo 0 step 2) {
+				println(i)
+		}
+		
+Para navegar pelo ARRAY ou LISTA so pelo INDEX e nao p[elo seus items
+fun main() {
+		val array = arrayOf("a", "b", "c")
+			for (i in array.indices) {
+				println(array[i])
+				}
+}
+
+While e Do-While
+Returns and jumps
+
+Break and continue labels
+loop@ for (i in 1..100) {
+	for (j in 1..100) {
+		if (...) break@loop //Para usar Break em um loop, tem q ser um Continue Labekl e por um @ no fim da declarao
+		}
+}	
+
+Return to labels
