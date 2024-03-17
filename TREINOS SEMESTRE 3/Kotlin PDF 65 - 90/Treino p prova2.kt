@@ -333,3 +333,150 @@ loop@ for (i in 1..100) {
 }	
 
 Return to labels
+fun foo() {
+	listOf(1, 2, 3, 4, 5).forEach {
+		if (it == 3) return //Ao chegar no 3 a funcao inteira eh interrompida
+			print(it)
+}
+	println("this point is unreachable")
+}
+	//sampleEnd
+fun main() {
+	foo()
+}
+	
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+
+Exceptions
+
+fun main() {
+    try {
+        throw Exception("Hi There!") //Criamos uma excecao, um erro
+    } catch (e: Exception) { //Se der esse erro
+        println("Exceção capturada: ${e.message}") //Print message
+    } finally { //Finalmmente, independentemente do que aconteca
+        println("Este bloco sempre será executado.") //Print message
+    }
+}
+
+fun getNumberFromUser(): Int {
+	println("Por favor, insitra um numero: ")
+	val userINput = reaadLine()
+	return userINput!!.toInt()
+}
+
+fun main() {
+	try{
+		val number = getNumberFromUser()
+	} catch (e: NumberFormatException) {
+		println("Isso nao eh um numero valido")
+	} finally {
+		println("Obrigado por usar o programa")
+	}
+}
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+
+Packages and imports
+
+Imports = biblioteca de funcoes + funcoes de outros modulos -> pode ser especificado para o que vc quer importar:
+import org.example.Message // Message is now accessible without qualification
+import org.example.* // everything in 'org.example' becomes accessible
+
+Classes
+class MinhaClasse //Classe sem atributos e sem corpo somente com cabecalho
+class MinhaClasse<T>(atributo: T) //Classe com atributos em um construtor primario e sem corpo -> T eh tipo generico
+class MinhaClasse<t>(atributo2: t) { //Classe com atributos em um construtor primario e com corpo -> t eh tipo generico
+    fun minhaFuncao() {
+        println("Olá do método minhaFuncao!")
+    }
+}
+
+Construtor primario
+exemplos: 
+class MinhaClasse(val atributo: Int) 
+
+class Person(val firstName: String, val lastName: String, var isEmployed: Boolean = true)
+
+class Person(
+val firstName: String,
+val lastName: String,
+var age: Int, // trailing comma
+) { /*...*/ }
+
+class InitOrderDemo(name: String) {
+	val firstProperty = "First property: $name".also(::println)
+}
+
+class ClasseComFUncao(val atributo: Int) {
+	fun minhaFuncao() {
+		println("Olá do método minhaFuncao!")
+	}
+}
+
+Construtor secundario
+iniciados com o metodo constructor(atributo: Tipo) 
+exemplos:
+
+class Pessoa(val nome: String, val idade: Int) {
+	fun printmensasage(){
+		println("Ola, meu nome eh $nome e tenho $idade anos")
+	}
+
+	constructor(nome: String) : this(nome, 0) 
+    
+    fun printmensasage2(){
+			println("Ola, meu nome eh $nome e sem idade especificada")// A declaracao funcao deve ficar fora do conmstrutro secundario para funcionar corretamente
+		}
+}
+
+fun main(){
+	val p1 = Pessoa("Lucas", 25)
+	val p2 = Pessoa("Pedro")
+    p1.printmensasage()
+    p2.printmensasage2()
+}
+
+Class Inheritance - Classe e subclasse - Orientacao objeto?
+exemplos:
+
+open class Animal(val especie: String) { //Classe pai, OPEN = aberta para ser herdada
+	open fun fazerSom() {
+		println("O animal esta fazendo um som")
+	}
+}
+
+class Cachorro(val nome: String) : Animal(nome) { //Classe filha, o tipo da classe filha eh a classe pai entrando como atributo/parametro nome
+	override fun fazerSom() { //Override = sobrescrever a funcao do pai
+		println("O cachorro late: Woof! Woof!")
+	}
+
+	fun abanarRabo() {
+        println("O cachorro está abanando o rabo")
+    }
+}
+
+fun main(){
+	val animal = Animal("doguinho")
+	val yorkshire = Cachorro("Robertinho")
+
+	animal.fazerSom()
+	yorkshire.fazerSom()
+	yorkshire.abanarRabo()
+}
+
+Overriding methods
+open class Shape {
+	open val vertexCount: Int = 0
+	}
+
+	class Rectangle : Shape() {
+	override val vertexCount = 4
+	}
+
+OU
+
+open class Shape(open val vertexCount: Int = 0)
+class Rectangle(override val vertexCount: Int = 4) : Shape()
