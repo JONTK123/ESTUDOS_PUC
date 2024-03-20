@@ -123,9 +123,9 @@ class GerenciadorLocacoes (){
         println("Locações: $lista")
     }
     
-    fun buscapCNPJ(CNPJ: String, lista: MutableList<Locacao>):list<Locacao> { 
+    fun buscapCNPJ(CNPJ: String):list<Locacao> { 
         val listaCNPJ: MutableList<Locacao> = mutableListOf() 
-        for (i in lista){
+        for (i in listaLoc){
             if CNPJ == i.e.CNPJ 
                 listaCNPJ.add(CNPJ) 
         }
