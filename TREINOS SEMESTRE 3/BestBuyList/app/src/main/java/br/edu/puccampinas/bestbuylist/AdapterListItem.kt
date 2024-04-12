@@ -31,6 +31,8 @@ class AdapterListItem(
     }
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+        //Ja nao estamos usando o viewbinding? Por que estamos referenciando o id?
         val ckCheckItem: CheckBox = itemView.findViewById(R.id.ckCheckItem)
         val tvItemDescription: AppCompatTextView = itemView.findViewById(R.id.tvItemDescription)
         val ivDeleteItem: ImageView = itemView.findViewById(R.id.ivDeleteItem)
@@ -41,7 +43,11 @@ class AdapterListItem(
                 listener.delete(items[adapterPosition])
             }
         }
-
     }
-
 }
+
+// RecyclerView:
+// Exibe os dados
+
+// Adapter:
+// Operações de gerenciamneto desses daods, essas operções sao addnewitem, deleteitem e opreações DAO

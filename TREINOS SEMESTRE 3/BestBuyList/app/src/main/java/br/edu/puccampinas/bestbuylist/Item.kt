@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Item (
-    @PrimaryKey val id: Int?,
+    @PrimaryKey val id: Int,
     @ColumnInfo(name="description") val description: String,
     @ColumnInfo(name="checked") val checked: Boolean
 )
+
+//Entidade eh uma classe ITEM

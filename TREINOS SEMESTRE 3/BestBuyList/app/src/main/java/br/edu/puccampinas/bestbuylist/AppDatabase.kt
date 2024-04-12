@@ -27,3 +27,5 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 }
+
+//Cria um banco de dados e como uma tabela a classe Item

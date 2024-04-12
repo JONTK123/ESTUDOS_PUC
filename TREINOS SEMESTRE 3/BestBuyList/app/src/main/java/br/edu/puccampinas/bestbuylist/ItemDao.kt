@@ -25,3 +25,5 @@ interface ItemDao {
     @Delete
     fun delete(item: Item)
 }
+
+//@DAO são operações de BD com a classe ITEM

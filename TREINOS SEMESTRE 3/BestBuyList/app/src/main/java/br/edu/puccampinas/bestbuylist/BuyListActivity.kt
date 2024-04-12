@@ -38,6 +38,8 @@ class BuyListActivity : AppCompatActivity(), OnDeleteItem {
 
         // Inserindo dados estáticos no banco (opcional, caso o banco esteja vazio)
         insertData()
+        
+        delete()
     }
 
     private fun adjustLayoutConstraint() {
@@ -72,7 +74,7 @@ class BuyListActivity : AppCompatActivity(), OnDeleteItem {
     }
 
     private fun insertData() {
-        // Inserir dados estáticos no banco de dados (caso esteja vazio)
+        // Inserir dados estáticos no banco de dados (CASO BD ESTEJA VAZIO)
         CoroutineScope(Dispatchers.IO).launch {
             val i1 = Item(1, "Detergente", false)
             val i2 = Item(2, "Sabão em pó", false)
@@ -83,7 +85,18 @@ class BuyListActivity : AppCompatActivity(), OnDeleteItem {
     }
 
     override fun delete(item: Item) {
-        // Apagar o elemento da lista (fazer a implementação)
-        Snackbar.make(binding.root, "Implementar... ", Snackbar.LENGTH_LONG).show()
+        CoroutineScope(Dispatchers.IO).launch {
+            db.itemDao().delete(item)
+        }
     }
-}
+
+// RecyclerView:
+// Exibe os dados
+
+// Adapter:
+// Operações de gerenciamneto desses daods, essas operções sao addnewitem, deleteitem e opreações DAO
+
+//Layout esta sendo inflado com o viewbinding setando as views
+//Prepara o RecyclerView dps de ter criado os viewbinding
+//Arruma a constraint
+//
