@@ -4,7 +4,15 @@ import android.os.Bundle // O "Bundle" é um objeto que contém dados passados e
 import androidx.appcompat.app.AppCompatActivity // "AppCompatActivity" é uma classe base para atividades, fornecendo funcionalidades comuns.
 import com.example.estudosprova2.databinding.ActivityMainBinding // Import da classe binding com o nome da activity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
+// Imports de classes e funções de RecyclerView
+import androidx.recyclerview.widget.LinearLayouManager
+import androidx.recyclerview.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 
 //CICLO DE VIDA DE UMA ACTIVITY
 
@@ -15,15 +23,53 @@ import com.google.firebase.auth.FirebaseAuth
 class MainActivity : AppCompatActivity() { // Classe principal da atividade, derivada de AppCompatActivity.
 
     private lateinit var binding: ActivityMainBinding // Nome do Binding vai mudar de acordo com o nome da activity
-    private lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth // Autenticacao do Firebase, vai carregar as funções de autenticação
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var user: String
+    private lateinit var userID: String
+    private lateinit var db: FirebaseFirestore // Firestore eh um banco de dados, vai carregar funções de manipulação de dados
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var NumeroAdapter: NumeroAdapter
 
+        inner class NumeroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { // Cria a ViewHolder
+            private val textViewNumero: TextView = itemView.findViewById(R.id.textViewItem)
+    
+            fun bind(numero: String) {
+                textViewNumero.text = numero
+    
+                // Adiciona um listener de clique ao item da lista
+                itemView.setOnClickListener {
+                    Toast.makeText(itemView.context, "Clicou no número: $numero", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    inner class NumeroAdapter : RecyclerView.Adapter<NumeroViewHolder>() { // Definindo um adaptador para manipular dados da recycler view
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumeroViewHolder { // Cria a ViewHolder
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_lista, parent, false) // Infla cada item do ViewHolder com o layout do item_list.xml
+            return NumeroViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: NumeroViewHolder, position: Int) { // Associamos posições para os dados da ViewHolder????
+            val numero = (position + 1).toString() // Números de 1 a 100
+            holder.bind(numero)
+        }
+
+        override fun getItemCount(): Int {
+            return 100 // Número total de itens na lista
+        }
+    }
+}
 
     override fun onCreate(savedInstanceState: Bundle?) { // Sobreescreve a funcao Oncreate quando a atividade está sendo criada. "savedInstanceState" é usado para restaurar o estado da atividade.
         super.onCreate(savedInstanceState) // Chama a implementação da classe pai (Original) para garantir que a inicialização básica seja realizada.
+
+        recyclerView = findViewById(R.id.recyclerView) // Referencia o RecyclerView do layout
+        recyclerView.layoutManager = LinearLayoutManager(this) // Define o layout do RecyclerView
+        recyclerView.adapter = NumeroAdapter() // Define o adaptador do RecyclerView
 
         binding = ActivityMainBinding.inflate(layoutInflater) // Inicializando o binding, deve ficar dentro de um metodo e apenas dentro de um, geralmente no oncreate mesmo
         auth = FirebaseAuth.getInstance()
@@ -36,6 +82,14 @@ class MainActivity : AppCompatActivity() { // Classe principal da atividade, der
 
         binding.textView.text = "Hello, ViewBinding!" //Acessando a View pelo viewbinding. View deve ter ID com nome da sua View. Sobreescrevemos o android:text do xml
 
+        // Simulando dados para a RecyclerView
+        val numeros = mutableListOf<String>()
+        for (i in 1..100) {
+            numeros.add("Número $i")
+        }
+
+        recyclerView.adapter = NumeroAdapter(numeros) // Define o adaptador do RecyclerView
+
     }
 
     override fun onStart() {
@@ -44,7 +98,7 @@ class MainActivity : AppCompatActivity() { // Classe principal da atividade, der
                 //Exemplo P.i -> Por exemplo, o usuario ja estava logado no app antes de sair. Ao retornar ->
                 // o OnStart ira carregar primeiro q a funcao principal para verificar se o usuario ja estava logado
 
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Registro bem-sucedido
@@ -60,12 +114,34 @@ class MainActivity : AppCompatActivity() { // Classe principal da atividade, der
                 // Lidar com a falha na criação do usuário
             }
 
+            db = FirebaseFirestore.getInstance()
+
+            user = auth.currentUser
+            userID = user.uid
+
+            val usuario = hasMapOf (
+                "email" to email,
+                "password" to password,
+                "ID" to userID
+            )
+
+            db.collection("users").document(userID)
+                .add(usuario)
+
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                
+                .onFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+
+        }
+
     override fun onResume() {
         super.onResume()
         //OnResume - A atividade está em primeiro plano e pronta para interações do usuário
                 //Toda vez q eu retornar para essa atividade, ele ira Retomar algo. Seja demonstrar informacoes de login do usuario autenticado
                 //Exemplo P.I -> Quando o usuario retornar, ele retoma as variaveis que foram salvas no OnPause para retomar o uso do app
-
     }
 
     override fun onPause() {
