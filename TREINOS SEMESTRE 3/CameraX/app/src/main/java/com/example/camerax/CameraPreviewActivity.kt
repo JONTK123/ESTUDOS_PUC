@@ -1,90 +1,94 @@
 package com.example.camerax
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.LifecycleOwner
+import com.example.camerax.databinding.YourBindingClassBinding
+import java.io.File
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 class CameraPreviewActivity : AppCompatActivity() {
 
-    // Binding para associar as views do layout XML com variáveis na classe
-    private lateinit var binding: YourBindingClass
-
-    // Variável que representa a instância futura do provedor da câmera
-    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
-
-    // Variável que representa o seletor de câmera (pode ser usado para selecionar a câmera traseira, frontal, etc.)
+    private lateinit var binding: YourBindingClassBinding
+    private lateinit var cameraProviderFuture: ProcessCameraProvider
     private lateinit var cameraSelector: CameraSelector
-
-    // Variável que representa a captura de imagem
-    private lateinit var imageCapture: ImageCapture
-
-    // Executor para captura de imagem
+    private var imageCapture: ImageCapture? = null
     private lateinit var imgCaptureExecutor: Executor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Habilita o edge-to-edge (vai além das bordas da tela)
         enableEdgeToEdge()
+        setContentView(R.layout.activity_camera_preview)
 
-        // Define o layout da atividade
-        setContentView(R.layout.your_layout)
+        binding = YourBindingClassBinding.bind(findViewById(R.id.rootLayout))
+        imgCaptureExecutor = Executors.newSingleThreadExecutor()
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-        // Inicializa o binding usando a classe gerada pelo data binding
-        binding = YourBindingClass.bind(findViewById(R.id.rootLayout))
+        startCamera()
 
-        // Inicializa o futuro provedor da câmera
-        cameraProviderFuture = ProcessCameraProvider.getInstance(context)
-
-        // Inicializa o seletor de câmera com opções de configuração
-        cameraSelector = CameraSelector.Builder()
-            .requireLensFacing(CameraSelector.LENS_FACING_BACK) // Exemplo: seleciona a câmera traseira
-            .build()
-
-        // Inicializa a captura de imagem
-        imageCapture = ImageCapture.Builder()
-            .setTargetRotation(binding.previewView.display.rotation)
-            .build()
-
-        // Executor para a captura de imagem
-        imgCaptureExecutor = ContextCompat.getMainExecutor(this)
+        binding.btntakePhoto.setOnClickListener {
+            takePhoto()
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                blinkPreview()
+            }
+        }
     }
 
-    // Função para iniciar a câmera
     private fun startCamera() {
-        cameraProviderFuture.addListener({
-            // Obtém a instância do provedor da câmera
+        cameraProviderFuture.addListener(Runnable {
+            imageCapture = ImageCapture.Builder().build()
+
             val cameraProvider = cameraProviderFuture.get()
 
-            // Cria uma instância do Preview
-            val preview = Preview.Builder()
-                .build()
+            val preview = Preview.Builder().build().also {
+                it.setSurfaceProvider(binding.previewView.surfaceProvider)
+            }
 
             try {
-                // Remove todos os casos de uso existentes associados ao LifecycleOwner (neste caso, a atividade)
                 cameraProvider.unbindAll()
-
-                // Liga a câmera ao ciclo de vida (LifecycleOwner)
-                cameraProvider.bindToLifecycle(
-                    this, // LifecycleOwner
-                    cameraSelector, // Seletor de câmera
-                    preview // Preview
-                )
-
-                // Adiciona um uso para a captura de imagem
-                val imageCapture = ImageCapture.Builder().build()
-
+                cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview, imageCapture)
             } catch (e: Exception) {
-                // Trata qualquer exceção que possa ocorrer
-                Log.e("CameraPreviewActivity", "Erro ao ligar a câmera: ${e.message}", e)
+                Log.e("CameraXApp", "Erro ao iniciar a câmera", e)
             }
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun takePhoto() {
+        imageCapture?.let { capture ->
+            val fileName = "FOTO_JPEG_${System.currentTimeMillis()}"
+            val file = File(externalMediaDirs[0], "${fileName}.jpg")
+            val outputFileOptions = ImageCapture.OutputFileOptions.Builder(file).build()
+
+            capture.takePicture(outputFileOptions, imgCaptureExecutor,
+                object : ImageCapture.OnImageSavedCallback {
+                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                        Log.i("CameraXApp", "Foto capturada com sucesso: ${file.toURI()}")
+                    }
+
+                    override fun onError(exception: ImageCaptureException) {
+                        Log.e("CameraXApp", "Erro ao salvar foto", exception)
+                    }
+                })
+        }
+    }
+
+    private fun blinkPreview() {
+        binding.root.postDelayed({
+            binding.root.foreground = ColorDrawable(Color.WHITE)
+
+            binding.root.postDelayed({
+                binding.root.foreground = null
+            }, 50)
+        }, 100)
     }
 }
