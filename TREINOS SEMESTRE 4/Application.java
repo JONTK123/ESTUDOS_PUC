@@ -1,4 +1,3 @@
-
 public class Application {
     public static void main(String[] args) {
         // // Criando o objeto Scanner
@@ -37,56 +36,66 @@ public class Application {
         //         break;
         // }
 
-        //Inicializa um array de inteiros
-        int[] values;
+        // //Inicializa um array de inteiros
+        // int[] values;
 
-        //Inicializa um array de inteiros com 3 posições
-        values = new int[3];
+        // //Inicializa um array de inteiros com 3 posições
+        // values = new int[3];
 
-        values[0] = 10;
-        values[1] = 20;
-        values[2] = 30;
+        // values[0] = 10;
+        // values[1] = 20;
+        // values[2] = 30;
 
-        System.out.println(values[0]);
-        System.out.println(values[1]);
-        System.out.println(values[2]);
+        // System.out.println(values[0]);
+        // System.out.println(values[1]);
+        // System.out.println(values[2]);
 
-        for(int i=0; i<values.length; i++) {
-            System.out.println(values[i]);
-        }
+        // for(int i=0; i<values.length; i++) {
+        //     System.out.println(values[i]);
+        // }
 
-        int[] numbers = {5,6,7};
+        // int[] numbers = {5,6,7};
 
-        for(int i=0; i<numbers.length; i++) {
-            System.out.println(numbers[i]);
-        }
+        // for(int i=0; i<numbers.length; i++) {
+        //     System.out.println(numbers[i]);
+        // }
 
-        //Inicializa array com 3 valores na lista, mas sem posições
-        int[] numbers2 = {5,6,7};
-        //Inicializa array com 3 posições, mas sem valores
-        int[] numbers3 = new int[3];
-        numbers3[0] = 5;
-        numbers3[1] = 6;
+        // //Inicializa array com 3 valores na lista, mas sem posições
+        // int[] numbers2 = {5,6,7};
+        // //Inicializa array com 3 posições, mas sem valores
+        // int[] numbers3 = new int[3];
+        // numbers3[0] = 5;
+        // numbers3[1] = 6;
 
-        String[] nomes = new String[3];
-        nomes[0] = "Pedro";
-        nomes[1] = "João";
+        // String[] nomes = new String[3];
+        // nomes[0] = "Pedro";
+        // nomes[1] = "João";
 
-        System.out.println(nomes);
+        // System.out.println(nomes);
 
-        int[] values5 = {3,5,2453};
-        System.out.println(values5[2]);
+        // int[] values5 = {3,5,2453};
+        // System.out.println(values5[2]);
 
-        int[][] grid = {
-            {3,5,2342},
-            {2,4},
-        };
+        // int[][] grid = {
+        //     {3,5,2342},
+        //     {2,4},
+        // };
 
-        System.out.println(grid[0][2]);
-        System.out.println(grid[1][0]);
+        // System.out.println(grid[0][2]);
+        // System.out.println(grid[1][0]);
 
-        String[][] texts = new Strings[2][3];
-        texts[0][1] = "Hello there";
+        // String[][] texts = new String[2][3]; //2 rows and 3 columns
+
+        // texts[0][1] = "Hello there";
+
+        // System.out.println(texts[0][1]);
+
+        // for(int i=0; i<grid.length; i++) {
+        //     for(int k=0; k<grid[i].length; k++) {
+        //         System.out.println(grid[i][k]);
+        //     }
+        // }
+
     }
     
 }
