@@ -138,35 +138,25 @@ public class Main {
         try {
             Horario h1 = new Horario((byte) 10, (byte) 30, (byte) 40);
             Horario h2 = new Horario((byte) 5, (byte) 2, (byte) 50);
-            Horario h3 = new Horario((byte) 21, (byte) 30, (byte) 1);
 
             System.out.println(h1.toString());
             System.out.println(h2.toString());
-            System.out.println(h3.toString());
 
             h1.adiante(10);
             System.out.println(h1.toString());
 
-            h2.adiante(90);
-            System.out.println(h2.toString());
+            h1.adiante(20);
+            System.out.println(h1.toString());
 
-            h2.adiante(30);
-            System.out.println(h3.toString());
-
-            h1.equals(h2);
-            h1.equals(h3);
+            h1.adiante(30);
+            System.out.println(h1.toString());
+            
+            System.out.println(h1.equals(h2));
 
             h1.atrase(5);
             System.out.println(h1.toString());
 
-            h2.atrase(45);
-            System.out.println(h2.toString());
-
-            h2.atrase(15);
-            System.out.println(h3.toString());
-
             System.out.println(h1.diferenca(h2));
-            System.out.println(h1.diferenca(h3));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
