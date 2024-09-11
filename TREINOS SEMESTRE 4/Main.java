@@ -1,4 +1,6 @@
-class Horario {
+import java.util.Vector;
+
+class Horario implements Comparable <Horario>, Cloneable {
     byte h, m, s;
 
     private static boolean isValida(byte h, byte m, byte s) {
@@ -122,6 +124,27 @@ class Horario {
 
         return Math.abs(thisSegundos - hSegundos);
     }
+
+    @Override
+    public int compareTo (Horario h) {
+        if (this.h > h.h) return 1;
+        else if (this.h < h.h) return -1;
+        else if (this.m > h.m) return 1;
+        else if (this.m < h.m) return -1;
+        else if (this.s > h.s) return 1;
+        else if (this.s < h.s) return -1;
+        else
+        return 0;
+    }
+
+    @Override
+    public Horario clone() {
+        try {
+            return (Horario) super.clone(); //Retorna uma copia da instancia da classe Horario usando metodo clone da super classe Object
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }
 
 public class Main {
@@ -167,8 +190,30 @@ public class Main {
             h4.atrase(20);
             System.out.println("Caso 10: " + h4.toString()); // Esperado: 23:59:50
 
+            // Caso 11: Adiantando para mudança de dia
+            Horario h5 = new Horario((byte) 23, (byte) 59, (byte) 50);
+            h5.adiante(10);
+            System.out.println("Caso 11: " + h5.toString()); // Esperado: 00:00:00
+
+            // Caso 12: Comparando horários
+            Horario h6 = new Horario((byte) 10, (byte) 30, (byte) 40);
+            Horario h7 = new Horario((byte) 10, (byte) 30, (byte) 40);
+            System.out.println("Caso 12: " + h6.compareTo(h7)); // Esperado: 0
+
+            // Caso 13: Testando clone
+            Horario h8 = new Horario((byte) 10, (byte) 30, (byte) 40);
+            Vector<Horario> horarios = new Vector<Horario>();
+
+            horarios.add(h8.clone());
+
+            h8.setH((byte) 20);
+
+            System.out.println("Caso 13: " + horarios.get(0).toString()); // Esperado: 10:30:40
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+
     }
 }
