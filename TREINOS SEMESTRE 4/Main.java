@@ -137,12 +137,30 @@ class Horario implements Comparable <Horario>, Cloneable {
         return 0;
     }
 
+    // @Override
+    // public Horario clone() {
+    //     try {
+    //         return (Horario) super.clone(); //Retorna uma copia da instancia da classe Horario usando metodo clone da super classe Object
+    //     } catch (CloneNotSupportedException e) {
+    //         throw new AssertionError();
+    //     }
+    // }
+
+    // Construtor de cópia
+    public Horario(Horario modelo) throws Exception {
+        if (modelo == null) throw new Exception("Modelo ausente");
+
+        this.h = modelo.h;
+        this.m = modelo.m;
+        this.s = modelo.s;
+    }
+
     @Override
     public Horario clone() {
         try {
-            return (Horario) super.clone(); //Retorna uma copia da instancia da classe Horario usando metodo clone da super classe Object
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+            return new Horario(this); // Usa o construtor de cópia para criar uma cópia
+        } catch (Exception e) {
+            throw new AssertionError("Clonagem falhou", e); // Nunca deve ocorrer se this não for null
         }
     }
 }
@@ -210,6 +228,16 @@ public class Main {
 
             System.out.println("Caso 13: " + horarios.get(0).toString()); // Esperado: 10:30:40
 
+            // Caso 14: Testando clone 2.0
+            Horario h9 = new Horario((byte) 15, (byte) 45, (byte) 30);
+            Horario h10 = h9.clone();
+            Horario h11 = h9;
+            h9.setM((byte) 50);
+
+            System.out.println("Caso 14: " + h10.toString()); // Esperado: 15:45:30
+            System.out.println("Caso 14: " + h9.toString());  // Esperado: 15:50:30
+
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -217,3 +245,5 @@ public class Main {
 
     }
 }
+
+// 
