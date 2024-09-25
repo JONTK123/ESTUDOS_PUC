@@ -1,5 +1,6 @@
+package prova1.model;
+
 public class Data {
-    public class Data {
         private byte dia, mes;
         private short ano;
     
@@ -136,5 +137,5 @@ public class Data {
             }
         }
     }
-    
-}
+
+

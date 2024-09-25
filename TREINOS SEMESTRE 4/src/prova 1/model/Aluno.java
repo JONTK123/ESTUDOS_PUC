@@ -2,6 +2,7 @@
 //Utilize o "." para acessar subpastas
 package prova1.model;
 
+
 //Nomenclatura - Letas minusculas separadas por "."
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -12,7 +13,7 @@ import java.util.regex.Matcher;
 //Nomenclatura - Inicial maiuscula
 //Public pois a classe sera acessada por outras classes como a Main ao instanciar um objeto
 //implements - Adiciona metodos nao obrigatorios a classe (Comparable) e Cloneable
-public class Data implements Comparable<Data>, Cloneable {
+public class Aluno implements Comparable<Aluno>, Cloneable {
 
     //Nomenclatura - Letras minusculas e maiuscula na primeira palavra
     //Private pois a variavel sera acessada apenas dentro da classe SEMPRE PRIVATE pois a variavel nao deve ser acessada DIRETAMENTE
@@ -45,6 +46,10 @@ public class Data implements Comparable<Data>, Cloneable {
         this.RA = other.RA;
         this.idade = other.idade;
         this.dataNascimento = other.dataNascimento;
+    }
+
+    public int compareTo(Aluno other) {
+        return this.nomeCompleto.compareTo(other.nomeCompleto);
     }
 
 

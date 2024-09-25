@@ -1,6 +1,7 @@
 package prova1;
-import prova1.model.Data;
+
 import prova1.model.Aluno;
+import prova1.model.Data;
 
 import java.io.IOException;
 import java.io.BufferedReader;
