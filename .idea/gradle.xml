@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TREINOS SEMESTRE 3/BestBuyList" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/BestBuyList" />
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/BestBuyList/app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TREINOS SEMESTRE 3/CameraX" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/CameraX" />
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/CameraX/app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TREINOS SEMESTRE 3/ESTUDOSPROVA2" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/ESTUDOSPROVA2" />
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/ESTUDOSPROVA2/app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TREINOS SEMESTRE 3/Requests" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/Requests" />
+            <option value="$PROJECT_DIR$/TREINOS SEMESTRE 3/Requests/app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
