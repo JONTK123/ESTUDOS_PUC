@@ -16,6 +16,11 @@ public class Main {
     //Public - porque a JVM precisa ter acesso a esse método
     //String[] args - é usado para obter argumentos da linha de comando
     public static void main(String[] args) {
+
+        //Isto eh uma instancia/objeto da classe Aluno
+        //a1 - ponteiro para endereco (local) de memoria do objeto onde foi armazenado
+        //Para chamar um metodo, usar nome instancia + ponto + nome do metodo
+        //This eh implicito e funciona como uma passagem de parametro p o metodo
         Aluno a1 = new Aluno ("Joao", "23010116", "22", "25/07/2002");
         System.out.println(h1);
     }

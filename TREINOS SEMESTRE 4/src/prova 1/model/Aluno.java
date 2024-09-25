@@ -23,6 +23,15 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
     private String RA;
     private Byte idade;
 
+    //Vamos usar esse atributo para exemplificar o uso da classe Byte wrapper para tipos primitivos
+    private Byte faltas;
+
+    //public - pois o atributo sera acessado por outras classes
+    //static - pois o atributo sera o mesmo para todas as instancias da classe, nao ha necessidade de instanciar a classe para acessar esse atributo
+    //final - pois o atributo nao pode ser alterado
+    //Atributos constantes sao os unicos que podem ser public
+    public static final Byte IDADE_MINIMA = 18;
+
     //Atributo do tipo Data (Classe Data)
     private Data dataNascimento;
 
@@ -31,11 +40,19 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
     //this - sao atributos da instancia criada
     //this - atribui valor para os atributos da instancia com o valor passado por parametro
     //Estamos construindo os atributos da classe com seus determinados tipos
-    public Aluno(String nomeCompleto, String RA, Byte idade, Data dataNascimento) {
+    public Aluno(String nomeCompleto, String RA, Byte idade, Data dataNascimento, Byte faltas) {
         this.nomeCompleto = nomeCompleto;
         this.RA = RA;
         this.idade = idade;
         this.dataNascimento = dataNascimento;
+
+        //Atribuimos valor de faltas criando uma instancia da classe Byte Wrapper, BOXED dentro de faltas OU
+        //Criando novo ponteiro/instancia da classe wrapper
+        this.faltas = new Byte (faltas);
+
+        //Metodo UNBOXED, rapido das classes wrapped
+        //Utilizando mesmo ponteiro/instancia da classe wrapper
+        //this.faltas = faltas;
     }
 
     //Construtor de copia - Recebe um objeto do mesmo tipo e copia seus atributos
@@ -48,9 +65,9 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
         this.dataNascimento = other.dataNascimento;
     }
 
-    public int compareTo(Aluno other) {
-        return this.nomeCompleto.compareTo(other.nomeCompleto);
+    public byte getFaltas() {
+        return this.faltas.byteValue();
+        //return this.fatlas //UNBOXED
     }
-
 
 }
