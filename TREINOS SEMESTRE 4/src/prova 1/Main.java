@@ -23,5 +23,19 @@ public class Main {
         //This eh implicito e funciona como uma passagem de parametro p o metodo
         Aluno a1 = new Aluno ("Joao", "23010116", "22", "25/07/2002");
         System.out.println(h1);
+
+        String nomeAluno = ai.getNome();
+        System.out.println(nomeAluno);
+
+        a1.setNome("Joao");
+        System.out.println(a1.getNome());
+
+        //Utilizando método toString()
+        System.out.println(a1.toString());
+
+        //Utilizando método equals()
+        Aluno a2 = new Aluno ("Joao", "23010115", "22", "25/07/2002");
+        System.out.println(a1.equals(a2));
+
     }
 }

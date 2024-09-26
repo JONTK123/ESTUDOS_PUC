@@ -12,7 +12,8 @@ import java.util.regex.Matcher;
 
 //Nomenclatura - Inicial maiuscula
 //Public pois a classe sera acessada por outras classes como a Main ao instanciar um objeto
-//implements - Adiciona metodos nao obrigatorios a classe (Comparable) e Cloneable
+//implements - Adiciona mgitetodos nao obrigatorios a classe (Comparable) e Cloneable
+//Não existe tipo primitivo de String
 public class Aluno implements Comparable<Aluno>, Cloneable {
 
     //Nomenclatura - Letras minusculas e maiuscula na primeira palavra
@@ -21,7 +22,7 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
     private String nomeCompleto;
     private String email;
     private String RA;
-    private Byte idade;
+    private byte idade;
 
     //Vamos usar esse atributo para exemplificar o uso da classe Byte wrapper para tipos primitivos
     private Byte faltas;
@@ -65,9 +66,139 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
         this.dataNascimento = other.dataNascimento;
     }
 
-    public byte getFaltas() {
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+    //Métodos Getters - Acessam os atributos instancia e retornam
+    //Não precisa passar instancia como parametro pois é implicito
+    //SEMPRE desenvolver esses métodos
+    public string getRA() {
+        return this.RA;
+    }
+
+    public string getEmail() {
+        return this.email;
+    }
+
+    public string getNomeCompleto() {
+        return this.nomeCompleto;
+    }
+
+    public Byte getFaltas() {
         return this.faltas.byteValue();
         //return this.fatlas //UNBOXED
+    }
+
+    public byte getIdade() {
+        reutrn this.idade
+    }
+
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+    //Métodos Setters - Atribuem valor aos atributos da instancia
+    //SEMPRE desenvolver esses métodos
+    public void setRA(String RA) {
+        this.RA = RA;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public void setFaltas(Byte faltas) {
+        this.faltas = new Byte(faltas);
+        //this.faltas = faltas; //UNBOXED
+    }
+
+    public void setIdade(Byte idade) {
+        this.idade = idade;
+    }
+
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+    //Métodos obrigatórios - SEMPRE desenvolver esses métodos na prova
+    //Todos os prints deverão ser desse jeito
+    //S maisuculo pois wrapper, nao existe string tipo primitivo
+    @Override
+    public String toString() {
+        return( "Nome completo: " + this.nomeCompleto +
+                "\nRA: " + this.RA +
+                "\nIdade: " + this.idade +
+                "\nData de nascimento: " + this.dataNascimento +
+                "\nFaltas: " + this.faltas
+                );
+    }
+
+    //
+    @Override
+    public boolean equals (Object obj) { //Object pois pode ser comparado com qualquer objeto
+        if (this == obj) return true; // Verifica se instancia = obj a ser comparado, logo true
+        if (obj == null) return false; // Verifica se objeto a ser comparado existe
+        if (obj.getClass() != this.getClass()) return false; // Verifica se objeto a ser comparado é da mesma classe
+
+        Aluno aluno = (Aluno) obj; // Muda o tipo do objeto a ser comparado para Aluno
+
+        //Compara cada atributo
+        if (aluno.nomeCompleto != this.nomeCompleto) return false;
+        if (aluno.RA != this.RA) return false;
+        if (aluno.idade != this.idade) return false;
+        if (aluno.dataNascimento != this.dataNascimento) return false;
+        if (aluno.faltas != this.faltas) return false;
+
+        return true; // Se todos os atributos forem iguais, retorna true
+    }
+
+    @Override
+    public int hashCode() {
+        int ret = 1;
+
+        // Atributos de instância
+        ret = ret * 7 + this.nomeCompleto.hashCode();
+        ret = ret * 7 + this.RA.hashCode();
+        ret = ret * 7 + this.dataNascimento.hashCode();
+
+        // Atributos primitivos utilizando wrappers
+        ret = ret * 2 + this.idade.hashCode();
+        ret = ret * 11 + Byte.valueOf(this.faltas).hashCode();
+
+        return ret;
+    }
+
+    //Método obrigatório mas SITUACIONAL
+    //implements Comparable<Aluno>
+    //compareTo - compara dois objetos da mesma classe
+    @Override
+    public int compareTo(Aluno a) {
+
+        //compareTo - método da classe String wrapper que compara duas strings
+        //Se for 0 quer dizer que são iguais
+        if (this.nomeCompleto.compareTo(a.nomeCompleto) > 0) { return 666; }
+        if (this.nomeCompleto.compareTo(a.nomeCompleto) < 0) { return -666; }
+        if (this.RA.compareTo(a.RA) > 0) { return 666; }
+        if (this.RA.compareTo(a.RA) < 0) { return -666; }
+        if (this.email).compareTo(a.email) > 0) { return 666; }
+        if (this.email).compareTo(a.email) < 0) { return -666; }
+        if (this.idade > a.idade) { return 666; }
+        if (this.idade > a.idade) { return -666; }
+
+        //Chamamos o método compareTo da classe Data, NÃO CONFUNDIR COM MÉTODO WRAPPER
+        if (this.dataNascimento.compareTo(a.dataNascimento) > 0) { return 666; }
+        if (this.dataNascimento.compareTo(a.dataNascimento) < 0) { return -666; }
+
+        //Chamamos o método compareTo da classe Byte
+        if (this.faltas.compareTo(a.faltas) > 0) { return 666; }
+        if (this.faltas.compareTo(a.faltas) < 0) { return -666; }
+
+
+
+
+        return 0;
     }
 
 }
