@@ -2,7 +2,6 @@
 //Utilize o "." para acessar subpastas
 package prova1.model;
 
-
 //Nomenclatura - Letas minusculas separadas por "."
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -10,11 +9,22 @@ import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import prova1.model.Data;
+import prova1.model.Pessoa;
+
 //Nomenclatura - Inicial maiuscula
 //Public pois a classe sera acessada por outras classes como a Main ao instanciar um objeto
 //implements - Adiciona mgitetodos nao obrigatorios a classe (Comparable) e Cloneable
 //Não existe tipo primitivo de String
-public class Aluno implements Comparable<Aluno>, Cloneable {
+//Extends - Herda atributos e metodos da classe Pessoa
+
+//Exemplo de JAVADOC
+/**
+ * A classe Aluno representa um aluno de uma instituição de ensino.
+ * @author Thiago Luiz Fossa
+ * @since 2000
+ */
+public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
 
     //Nomenclatura - Letras minusculas e maiuscula na primeira palavra
     //Private pois a variavel sera acessada apenas dentro da classe SEMPRE PRIVATE pois a variavel nao deve ser acessada DIRETAMENTE
@@ -42,6 +52,7 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
     //this - atribui valor para os atributos da instancia com o valor passado por parametro
     //Estamos construindo os atributos da classe com seus determinados tipos
     public Aluno(String nomeCompleto, String RA, Byte idade, Data dataNascimento, Byte faltas) {
+        super(CPF);
         this.nomeCompleto = nomeCompleto;
         this.RA = RA;
         this.idade = idade;
@@ -63,11 +74,13 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
         this.nomeCompleto = other.nomeCompleto;
         this.RA = other.RA;
         this.idade = other.idade;
-        this.dataNascimento = other.dataNascimento;
+
+        //diaNascimento eh um atributo de outro tipo, outra instancia - logo, criar nova instancia com dia mes e ano
+        this.dataNascimento = new Data (other.dataNascimento);
     }
 
-    //-----------------------------------------------------------------
-    //-----------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
 
     //Métodos Getters - Acessam os atributos instancia e retornam
     //Não precisa passar instancia como parametro pois é implicito
@@ -80,8 +93,17 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
         return this.email;
     }
 
-    public string getNomeCompleto() {
-        return this.nomeCompleto;
+    //Metodo try-catch dentro de um metodo tratando erros. Desse modo a MAIN nao precisa fazer nada pois o metodo faz
+    public String getNomeCompleto() {
+        try {
+            if (this.nomeCompleto == null) {
+                throw new Exception("Nome completo não pode ser nulo");
+            }
+            return this.nomeCompleto;
+        } catch (Exception e) {
+            System.err.println("Erro ao obter o nome completo: " + e.getMessage());
+            return null;
+        }
     }
 
     public Byte getFaltas() {
@@ -89,12 +111,14 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
         //return this.fatlas //UNBOXED
     }
 
-    public byte getIdade() {
-        reutrn this.idade
+    //throws Exception - somente para indicar q esse metodo pode tratar uma exception
+    //So fara efeito se na MAIN tiver um try-catch para pegar esse erro, se nao, nada ocorre
+    public byte getIdade() throws Exception {
+        return this.idade;
     }
 
-    //-----------------------------------------------------------------
-    //-----------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
 
     //Métodos Setters - Atribuem valor aos atributos da instancia
     //SEMPRE desenvolver esses métodos
@@ -119,8 +143,8 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
         this.idade = idade;
     }
 
-    //-----------------------------------------------------------------
-    //-----------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
 
     //Métodos obrigatórios - SEMPRE desenvolver esses métodos na prova
     //Todos os prints deverão ser desse jeito
@@ -171,6 +195,7 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
     }
 
     //Método obrigatório mas SITUACIONAL
+    //Implementar SOMENTE quando queremos comparar atributos da mesma classe
     //implements Comparable<Aluno>
     //compareTo - compara dois objetos da mesma classe
     @Override
@@ -195,10 +220,110 @@ public class Aluno implements Comparable<Aluno>, Cloneable {
         if (this.faltas.compareTo(a.faltas) > 0) { return 666; }
         if (this.faltas.compareTo(a.faltas) < 0) { return -666; }
 
-
-
-
         return 0;
     }
 
+    //Implementar essa funcao e construtor de copia somente quando na classe tiver metodos que alteram o this ( setters e etc... )\
+    //Existem 2 tipos de clone SUPERFICIAL E PROFUNDO
+    //PROFUNDO - Copia atributos/instancia de outra classe - Precisa construtor de copia
+    //SUPERFICIAL - Copia tipos primitivos - Nem precisa de construtor de copia apenas user super.clone()
+    //Temos alguns jeitos de executar, SEM consturtor de copia e COM.
+    //Aqui estamos clonando superficialmente os tipos primitivos e depois clonando o dataNascimento separadamente com metodo clone presente na classe Data
+    //SEM:
+    @Override
+    public Aluno clone() {
+        try{
+            alunoClonado = (Aluno) super.clone(); //Realiza clonagem superficial com tipos primitivos
+            alunoClonado.dataNascimento = this.dataNascimento.clone(); //Realiza clonagem profunda somente do atributo data
+            return alunoClonado;
+        } catch(Exception e) {
+            throw new AssertionError("Clonagem erro")
+        }
+    }
+
+//    //Aqui ja estamos clonando o atributo diaNascimento() diretamente no construtor de copia
+//    //COM:
+//    @Override
+//    public Aluno clone() {
+//        try{
+//            return new Aluno(this);
+//        } catch(Exception e) {
+//            throw new AssertionError("Clonagem erro")
+//        }
+//    }
+
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+
+    //Aqui estamos adicionando um metodo que calcula a idade do aluno
+    //Possui mesmo nome do metodo da classe Pessoa, mas com parametros diferentes
+    public int calcularIdade(int numero) {
+        return 0;
+    }
+
+    //O atributo CPF agora faz parte do objeto Aluno
+    public String getCPF() {
+        return CPF;
+    }
+
+    //Testando o super e protected
+    @Override
+    protected void mostrarNome() {
+        super.mostrarNome(); //Chama metodo original
+        System.out.println("Sobreescrevendo metodo mostrarNome() da classe Pessoa"); //Sobreescreve
+    }
+
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+
+    //Metodo para exemplificar JAVADOC
+    //Metodo qualquer
+    /**
+     * Titulo da funcao Verifica se o aluno é maior de idade.
+     * Lanca nova excecao
+     * @param idade - Idade do aluno
+     * @throws IllegalArgumentException - Se a idade for menor que 18
+     * @return - Retorna true se o aluno for maior de idade
+     * <ol>
+     *    <li>
+     *        Resumo da funcao - Verifica se o aluno é maior de idade
+     *    </li>
+     * <li/>
+     */
+    public int calcularAnosDeMatricula(int anoAtual, int anoDeMatricula) {
+        if (anoAtual < anoDeMatricula) {
+            throw new IllegalArgumentException("O ano atual não pode ser menor que o ano de matrícula.");
+        }
+        return anoAtual - anoDeMatricula;
+    }
+
+    //Usando JAVADOC no cmd ->
+        //cd C:\caminho\para\seus\arquivos
+        //javadoc *. Java
+
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+
+    //REGEX ->
+
+    //Criamos uma variavel constante regex
+    private static final String regExNom = "^[A-Z][a-z]*$";
+
+    //Compila o padrao de validacao. Torna o regex ativo a partir de agora
+    private static final Pattern padraoNome = Pattern.compile(regExNom);
+
+    //Metodo para validar o nome, verificar se esta dentro do regex
+    protected static void valideNome (String nome) throws exception {
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome não pode ser nulo");
+        }
+
+        //Verifica se o nome passado por parametro bate com o padrao de validacao
+        if (!Aluno.padraoNome.matcher(nome).matches()) {
+            throw new Exception ("Nome inválido");
+        }
+    }
 }
+
+//ESTUDAR VECTOR
+//VIDEOS DO PROFESSOR
