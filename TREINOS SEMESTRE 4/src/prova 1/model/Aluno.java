@@ -8,13 +8,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.Vector;
+
 
 import prova1.model.Data;
 import prova1.model.Pessoa;
+import prova1.model.Usuario;
 
 //Nomenclatura - Inicial maiuscula
 //Public pois a classe sera acessada por outras classes como a Main ao instanciar um objeto
-//implements - Adiciona mgitetodos nao obrigatorios a classe (Comparable) e Cloneable
+//implements - Adiciona mgitetodos nao obrigatorios a classe (Comparable) e Cloneable e tambem Herda Heterogenea da interface Usuario
 //Não existe tipo primitivo de String
 //Extends - Herda atributos e metodos da classe Pessoa
 
@@ -24,7 +27,7 @@ import prova1.model.Pessoa;
  * @author Thiago Luiz Fossa
  * @since 2000
  */
-public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
+public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable, Usuario {
 
     //Nomenclatura - Letras minusculas e maiuscula na primeira palavra
     //Private pois a variavel sera acessada apenas dentro da classe SEMPRE PRIVATE pois a variavel nao deve ser acessada DIRETAMENTE
@@ -82,6 +85,8 @@ public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
     //---------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------
 
+    //GETTERS
+
     //Métodos Getters - Acessam os atributos instancia e retornam
     //Não precisa passar instancia como parametro pois é implicito
     //SEMPRE desenvolver esses métodos
@@ -120,6 +125,8 @@ public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
     //---------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------
 
+    //SETTERS
+
     //Métodos Setters - Atribuem valor aos atributos da instancia
     //SEMPRE desenvolver esses métodos
     public void setRA(String RA) {
@@ -145,6 +152,8 @@ public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
 
     //---------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------
+
+    //METODOS - JAVA
 
     //Métodos obrigatórios - SEMPRE desenvolver esses métodos na prova
     //Todos os prints deverão ser desse jeito
@@ -255,6 +264,8 @@ public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
     //---------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------
 
+    //HERANCA
+
     //Aqui estamos adicionando um metodo que calcula a idade do aluno
     //Possui mesmo nome do metodo da classe Pessoa, mas com parametros diferentes
     public int calcularIdade(int numero) {
@@ -275,6 +286,8 @@ public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
 
     //---------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------
+
+    //JAVADOC
 
     //Metodo para exemplificar JAVADOC
     //Metodo qualquer
@@ -323,7 +336,59 @@ public class Aluno extends Pessoa implements Comparable<Aluno>, Cloneable {
             throw new Exception ("Nome inválido");
         }
     }
+
+
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+
+    //INTERFACE
+
+    //Apenas declarei um metodo na interface Usuario e aqui na classe Aluno eu a desenvolvi
+    //Nao podemos instancia-las, apenas criar objeto
+    //Usei @Override pois eh uma boa pratica para indicar que veio de uma interface
+    //Aqui eu escolhi retornar um email para indicar que eh um login, mas eu poderia criar um novo atributo String login
+    @Override
+    public String getLogin() {
+        return this.email;
+    }
+
+    //Explicacao de POLIMORFISMO esta na main
+
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+
+    //CLASS ABSTRACT
+
+    //Funciona parecido com uma interface, mas a diferenca eh que a classe abstrata pode ter metodos comuns e variaveis
+    //Nao podemos instancia-las
+    //Obrigatorio usar os metodos e atributos herdados
+    //Nao existe polimorfismo
+    @Override
+    public String adicionarAluno() {
+        return "Adicionando aluno";
+    }
+
+    @Override
+    public String removerAluno() {
+        return "Removendo aluno";
+    }
+
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+
+    //GUI -> FODASE NAO ENTENDI NADA DESSA MERDA
+
+    //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
+
+    //VECTOR
+
+    //Vector <Aluno> v;     -> Armazena outras classes, v eh um vetor de Alunos
+
+
+
 }
 
 //ESTUDAR VECTOR
-//VIDEOS DO PROFESSOR
+//INTERFACE
+//CLASSE ABSTRACT
