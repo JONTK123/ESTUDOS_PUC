@@ -10,7 +10,7 @@
 
 package treinosemestre4.exerciciosprova;
 
-public class Angulo {
+public class Angulo implements Comparable<Angulo>, Cloneable{
     private double angulo;
     private final double pi = 3.14;
 
@@ -49,28 +49,36 @@ public class Angulo {
         return this.angulo * 1.1111;
     }
 
-    public void setValorEmGrados(double angulo) throws Exception {
-        if(!Angulo.isValida(angulo)) { throw new Exception("Valor de angulo invalido"); }
-            this.angulo = angulo / 1.1111;
+    public void setValorEmGrados(double grados) throws Exception {
+        double anguloEmGraus = grados / 1.1111;
+        if(!Angulo.isValida(anguloEmGraus)) { throw new Exception("Valor de angulo invalido"); }
+            this.angulo = anguloEmGraus;
 
         // ou
 
         //if(angulo < 0 || angulo > 360 ) { throw new Exception'("Valor de angulo invalido"); }
-        //this.angulo = angulo / 1.1111;
+        //this.angulo = anguloEmGraus
     }
 
     public double getValorEmRadianos() {
         return this.angulo * pi / 180;
     }
 
-    public void setValorEmRadianos(double angulo) throws Exception {
-        if(!Angulo.isValida(angulo)) { throw new Exception("Valor de angulo invalido"); }
-        this.angulo = angulo * 180 / pi;
+    public void setValorEmRadianos(double radiano) throws Exception {
+        double anguloEmGraus = radiano * 180 / pi;
+        if(!Angulo.isValida(anguloEmGraus)) { throw new Exception("Valor de angulo invalido"); }
+        this.angulo = anguloEmGraus;
 
         // ou
 
-        //if(angulo < 0 || angulo > 360 ) { throw new Exception'("Valor de angulo invalido"); }
-        //this.angulo = angulo * 180 / pi;
+        //if(anguloEmGraus < 0 || anguloEmGraus > 360 ) { throw new Exception'("Valor de angulo invalido"); }
+        //this.angulo = anguloEmGraus
+    }
+
+    public String toString() {
+        return ("Angulo em graus: " + this.getValorEmGraus() + 
+               "\nAngulo em grados: " + this.getValorEmGrados() +
+               "\nAngulo em radianos: " + this.getValorEmRadianos());
     }
 
 }
