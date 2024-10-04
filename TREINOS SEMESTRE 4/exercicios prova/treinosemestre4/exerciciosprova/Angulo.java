@@ -8,8 +8,6 @@
 // e getValorEmRadianos que, sem receber parâmetros, retornam, respectivamente, 
 // o valor angular do objeto expresso em graus, grados e radianos
 
-package treinosemestre4.exerciciosprova;
-
 public class Angulo implements Comparable<Angulo>, Cloneable{
     private double angulo;
     private final double pi = 3.14;
@@ -29,6 +27,12 @@ public class Angulo implements Comparable<Angulo>, Cloneable{
         //ou
 
         //this.setAngulo(angulo);
+    }
+
+    public Angulo(Angulo a) throws Exception {
+        if (!Angulo.isValida(a.angulo)) {throw new Exception("xixi coco");}
+
+        this.angulo = a.angulo;
     }
 
     public double getValorEmGraus() {
@@ -75,10 +79,81 @@ public class Angulo implements Comparable<Angulo>, Cloneable{
         //this.angulo = anguloEmGraus
     }
 
+    @Override
     public String toString() {
         return ("Angulo em graus: " + this.getValorEmGraus() + 
                "\nAngulo em grados: " + this.getValorEmGrados() +
                "\nAngulo em radianos: " + this.getValorEmRadianos());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+
+        Angulo a = (Angulo) obj;
+
+        if(this.angulo != a.angulo ) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int ret = 1;
+
+        ret = ret * 2 + Double.valueOf(this.angulo).hashCode();
+        //ret = ret * 2 this.dataNascimento.hashCode();
+
+        return ret;
+    }
+
+    @Override
+    public int compareTo(Angulo a){
+        if(this.angulo > a.angulo) return 1;
+        if(this.angulo < a.angulo) return -1;
+        return 0;
+    }
+
+    @Override
+    public Object clone(){
+        Object ret = null;
+        
+        try {
+            ret = new Angulo(this);
+        } catch (Exception e ){}
+
+        return ret;
+    }
+
+    public static void main(String[] args) {
+
+        try {
+        Angulo a1 = new Angulo(10);
+        Angulo a2 = new Angulo(12);
+
+        System.out.println("\nAngulo em graus: " + a1.getValorEmGraus());
+        System.out.println("\nAngulo em grados: " + a1.getValorEmGrados());
+        System.out.println("\nAngulo em radianos: " + a1.getValorEmRadianos());
+        
+        System.out.println("\nOU pode ser escrito assim:");
+
+        System.out.println(a1.toString());
+
+        a1.setAngulo(20);
+        a1.setValorEmGrados(22);
+        a1.setValorEmRadianos(25);
+
+        System.out.println(a1.toString());
+
+        System.out.println(a1.equals(a2));
+
+        System.out.println(a1.compareTo(a2));
+
+        Angulo a3 = (Angulo) a1.clone();
+        a3.setAngulo(30);
+
+        } catch (Exception e) {}
+    }
 }
