@@ -9,16 +9,20 @@
 // o valor angular do objeto expresso em graus, grados e radianos
 
 public class Angulo implements Comparable<Angulo>, Cloneable{
+
+    static boolean isValida(double x, double y, double raio) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     private double angulo;
     private final double pi = 3.14;
 
-    private static boolean isValida(double angulo) {
+    private static boolean isValida(double angulo, double y, double raio) {
         if (angulo < 0 || angulo > 360 ) { return false; }
         return true;
     }
 
     public Angulo(double angulo) throws Exception {
-        if(!Angulo.isValida(angulo)) {
+        if(!Angulo.isValida(angulo, y, this.raio)) {
             throw new Exception("Valor de angulo invalido");
         }
 
@@ -30,7 +34,7 @@ public class Angulo implements Comparable<Angulo>, Cloneable{
     }
 
     public Angulo(Angulo a) throws Exception {
-        if (!Angulo.isValida(a.angulo)) {throw new Exception("xixi coco");}
+        if (!Angulo.isValida(a.angulo, y, this.raio)) {throw new Exception("xixi coco");}
 
         this.angulo = a.angulo;
     }
@@ -40,7 +44,7 @@ public class Angulo implements Comparable<Angulo>, Cloneable{
     }
 
     public void setAngulo(double angulo) throws Exception {
-        if(!Angulo.isValida(angulo)) { throw new Exception("Valor de angulo invalido"); }
+        if(!Angulo.isValida(angulo, y, this.raio)) { throw new Exception("Valor de angulo invalido"); }
         this.angulo = angulo;
 
         //ou
@@ -55,7 +59,7 @@ public class Angulo implements Comparable<Angulo>, Cloneable{
 
     public void setValorEmGrados(double grados) throws Exception {
         double anguloEmGraus = grados / 1.1111;
-        if(!Angulo.isValida(anguloEmGraus)) { throw new Exception("Valor de angulo invalido"); }
+        if(!Angulo.isValida(anguloEmGraus, y, this.raio)) { throw new Exception("Valor de angulo invalido"); }
             this.angulo = anguloEmGraus;
 
         // ou
@@ -70,7 +74,7 @@ public class Angulo implements Comparable<Angulo>, Cloneable{
 
     public void setValorEmRadianos(double radiano) throws Exception {
         double anguloEmGraus = radiano * 180 / pi;
-        if(!Angulo.isValida(anguloEmGraus)) { throw new Exception("Valor de angulo invalido"); }
+        if(!Angulo.isValida(anguloEmGraus, y, this.raio)) { throw new Exception("Valor de angulo invalido"); }
         this.angulo = anguloEmGraus;
 
         // ou
