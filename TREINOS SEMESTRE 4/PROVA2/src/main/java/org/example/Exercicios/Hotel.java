@@ -47,7 +47,7 @@ public class Hotel extends Hospedaria{
     public interdite(int numero){
         for (int i = 0; i < apto.length; i++ ){
             if (apto[i].getNumero().equals(numero)){
-                apto[i].ocupe(numero);
+                apto[i].this.ocupe(numero);
             }
         }
     }
@@ -55,7 +55,7 @@ public class Hotel extends Hospedaria{
     public desinterdite(int numero){
         for (int i = 0; i < apto.length; i++ ){
             if (apto[i].getNumero().equals(numero)){
-                apto[i].desocupe(numero);
+                apto[i].this.desocupe(numero);
             }
         }
     }
